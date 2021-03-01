@@ -1,3 +1,6 @@
+[Home](../index.md) > [docs](../docs_index.md) > [src](src_index.md)  
+
+
 # classdef: m2md
 
 **SuperClass:** handle
@@ -24,11 +27,8 @@ default
 | OutputMDdir_full | default |  |
 | OutputMD_name | default |  |
 | Template | default |  |
-| MakeMainIndex | default |  |
-| MainIndexName | default |  |
-| MakeSubIndices | default |  |
-| SubIndexName | default |  |
-| SubIndexUseDirName | default |  |
+| MakeIndex | default |  |
+| IndexTemplate | default |  |
 | TYPE | default | Type of m-file that was loaded |
 | FILENAME | default |  |
 | BCOMMENTS_INDS | default | Indices of block comment sections |
@@ -131,3 +131,7 @@ DESCRIPTION: Detailed Description Goes Here
 **[string] = bool2str(bool)**
 
 DESCRIPTION: Detailed Description Goes Here
+
+***
+
+*Generated on 01-Mar-2021 16:29:26 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

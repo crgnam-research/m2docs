@@ -6,11 +6,7 @@
 
 A Utility for Generating Markdown based Documentation for MATLAB
 
+**[View Documentation](docs_index.md)**
+
 # Overview
 *In Development*
-
-# Documentation
-
-- [m2md](m2md.md)
-- [defaultTemplate](defaultTemplate.md)
-- [generateDocs](generateDocs.md)
