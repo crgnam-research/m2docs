@@ -12,14 +12,14 @@
 
 | Function | Inputs | Outputs | Brief Description |
 | -------- | ------ | ------- | ----------------- |
-| [createCAtable](#createCAtable) | CLASS_ATTR | CLASS_ATTR_FORMAT |  |
-| [createPtable](#createPtable) | PROPERTIES | PROPERTIES_FORMAT |  |
-| [createCtable](#createCtable) | CONSTRUCTOR | CONSTRUCTOR_FORMAT |  |
-| [createMtable](#createMtable) | METHODS | METHODS_FORMAT |  |
-| [createCdescr](#createCdescr) | CONSTRUCTOR | CONSTRUCTOR_DESCR |  |
-| [createMdescr](#createMdescr) | METHODS | METHODS_DESCR |  |
-| [createSFtable](#createSFtable) | SUBFUNCTIONS | SUBF_FORMAT |  |
-| [createSFdescr](#createSFdescr) | SUBFUNCTIONS | SUBF_DESCR |  |
+| [createCAtable](#createcatable) | CLASS_ATTR | CLASS_ATTR_FORMAT |  |
+| [createPtable](#createptable) | PROPERTIES | PROPERTIES_FORMAT |  |
+| [createCtable](#createctable) | CONSTRUCTOR | CONSTRUCTOR_FORMAT |  |
+| [createMtable](#createmtable) | METHODS | METHODS_FORMAT |  |
+| [createCdescr](#createcdescr) | CONSTRUCTOR | CONSTRUCTOR_DESCR |  |
+| [createMdescr](#createmdescr) | METHODS | METHODS_DESCR |  |
+| [createSFtable](#createsftable) | SUBFUNCTIONS | SUBF_FORMAT |  |
+| [createSFdescr](#createsfdescr) | SUBFUNCTIONS | SUBF_DESCR |  |
 
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)

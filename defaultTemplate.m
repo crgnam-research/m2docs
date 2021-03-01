@@ -202,7 +202,7 @@ function [CONSTRUCTOR_FORMAT] = createCtable(CONSTRUCTOR)
             end
             attr = [attr,')'];
         end
-        name = sprintf('[%s](#%s)',CONSTRUCTOR.FUNCTION,CONSTRUCTOR.FUNCTION);
+        name = sprintf('[%s](#%s)',CONSTRUCTOR.FUNCTION,lower(CONSTRUCTOR.FUNCTION));
         inputs = sprintf([repmat('%s, ',1,length(CONSTRUCTOR.INPUTS)-1),'%s'],CONSTRUCTOR.INPUTS{:});
         outputs = sprintf([repmat('%s, ',1,length(CONSTRUCTOR.OUTPUTS)-1),'%s'],CONSTRUCTOR.OUTPUTS{:});
         CONSTRUCTOR_FORMAT = sprintf(['| Constructor | Attributes | Inputs | Outputs | Brief Description |\n',...
@@ -241,7 +241,7 @@ function [METHODS_FORMAT] = createMtable(METHODS)
                 end
                 attr = [attr,')'];
             end
-            name = sprintf('[%s](#%s)',METHODS{ii}.FUNCTION,METHODS{ii}.FUNCTION);
+            name = sprintf('[%s](#%s)',METHODS{ii}.FUNCTION,lower(METHODS{ii}.FUNCTION));
             inputs = sprintf([repmat('%s, ',1,length(METHODS{ii}.INPUTS)-1),'%s'],METHODS{ii}.INPUTS{:});
             outputs = sprintf([repmat('%s, ',1,length(METHODS{ii}.OUTPUTS)-1),'%s'],METHODS{ii}.OUTPUTS{:});
             METHODS_FORMAT = sprintf([METHODS_FORMAT,'| %s | %s | %s | %s | %s |\n'],...
@@ -297,7 +297,7 @@ function [SUBF_FORMAT] = createSFtable(SUBFUNCTIONS)
         SUBF_FORMAT = ['| Function | Inputs | Outputs | Brief Description |\n',...
                        '| -------- | ------ | ------- | ----------------- |\n'];
         for ii = 1:length(SUBFUNCTIONS)
-            name = sprintf('[%s](#%s)',SUBFUNCTIONS{ii}.FUNCTION,SUBFUNCTIONS{ii}.FUNCTION);
+            name = sprintf('[%s](#%s)',SUBFUNCTIONS{ii}.FUNCTION,lower(SUBFUNCTIONS{ii}.FUNCTION));
             inputs = sprintf([repmat('%s, ',1,length(SUBFUNCTIONS{ii}.INPUTS)-1),'%s'],SUBFUNCTIONS{ii}.INPUTS{:});
             outputs = sprintf([repmat('%s, ',1,length(SUBFUNCTIONS{ii}.OUTPUTS)-1),'%s'],SUBFUNCTIONS{ii}.OUTPUTS{:});
             SUBF_FORMAT = sprintf([SUBF_FORMAT,'| %s | %s | %s | %s |\n'],...

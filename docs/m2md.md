@@ -58,12 +58,12 @@ default
 
 | Method | Attributes | Inputs | Outputs | Brief Description |
 | ------ | ---------- | ------ | ------- | ----------------- |
-| [getCLASS_ATTR](#getCLASS_ATTR) | (Access = *private*) | self, cdef_line |  | Brief Description Goes Here |
-| [getPROP_ATTR](#getPROP_ATTR) | (Access = *private*) | self, prop_line | custom | Brief Description Goes Here |
-| [getMETHOD_ATTR](#getMETHOD_ATTR) | (Access = *private*) | self, method_line |  | Brief Description Goes Here |
-| [removeComments](#removeComments) | (Access = *private*) | self, i1, i2 | i1, i2 | Brief Description Goes Here |
-| [parseFunction](#parseFunction) | (Access = *private*) | func_line, msource | outstruct | Brief Description Goes Here |
-| [getMfiles](#getMfiles) | (Access = *private*) | InputMfiles | mfiles_rel, mfiles_full | Brief Description Goes Here |
+| [getCLASS_ATTR](#getclass_attr) | (Access = *private*) | self, cdef_line |  | Brief Description Goes Here |
+| [getPROP_ATTR](#getprop_attr) | (Access = *private*) | self, prop_line | custom | Brief Description Goes Here |
+| [getMETHOD_ATTR](#getmethod_attr) | (Access = *private*) | self, method_line |  | Brief Description Goes Here |
+| [removeComments](#removecomments) | (Access = *private*) | self, i1, i2 | i1, i2 | Brief Description Goes Here |
+| [parseFunction](#parsefunction) | (Access = *private*) | func_line, msource | outstruct | Brief Description Goes Here |
+| [getMfiles](#getmfiles) | (Access = *private*) | InputMfiles | mfiles_rel, mfiles_full | Brief Description Goes Here |
 | [bool2str](#bool2str) | (Access = *private*) | bool | string | Brief Description Goes Here |
 
 
