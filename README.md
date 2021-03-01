@@ -1,7 +1,7 @@
 # m2md: MATLAB 2 Markdown
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/crgnam-research/m2md/blob/main/LICENSE)
-[![Release](https://img.shields.io/github/v/release/crgnam-research/m2md?include_prereleases)](https://github.com/crgnam-research/m2md/releases/tag/v0.1)
+[![Release](https://img.shields.io/github/v/release/crgnam-research/m2md?include_prereleases)](https://github.com/crgnam-research/m2md/releases/tag/0.9.3)
 [![Issues](https://img.shields.io/github/issues/crgnam-research/m2md)](https://github.com/crgnam-research/m2md/issues)
 [![View m2md on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/88046-m2md)
 
