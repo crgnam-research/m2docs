@@ -1,3 +1,5 @@
+# m2md
+
 # Documentation
 
 - [generateDocs](generateDocs.md)
