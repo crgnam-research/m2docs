@@ -142,11 +142,12 @@ classdef m2md < handle
                 self.METHOD_ATTR.Sealed.DEFAULT   = 'false';
         
                 % Get the filename:
-                [~,self.FILENAME] = fileparts(self.InputMfiles_full{ii});
-                self.OutputMD_name = [self.FILENAME,'.md'];
+                [PATH,self.FILENAME] = fileparts(self.InputMfiles_full{ii});
+                PATH = erase(PATH,pwd);
+                self.OutputMD_name = [PATH,'/',self.FILENAME,'.md'];
                 
                 % Identify all block comments:
-                msource = fileread(self.InputMfiles_rel{ii});
+                msource = fileread(self.InputMfiles_full{ii});
                 [i1,i2] = regexp(msource,block_comments_exp,'matchcase');
                 self.BCOMMENTS_INDS = [i1',i2'];
                 
@@ -510,6 +511,7 @@ classdef m2md < handle
             end
             
             if contains(temp,'(')
+                disp(temp)
                 inputs_raw = extractBetween(temp,'(',')');
                 inputs_raw = strtrim(inputs_raw{1});
                 if contains(inputs_raw,',')
