@@ -114,9 +114,9 @@ classdef (Abstract = false) m2md < handle
             
             % Set the default values of supporter Method Attributes:
             self.METHOD_ATTR.Abstract.DEFAULT = 'false';
-            self.METHOD_ATTR.Access.DEFAULT = 'false';
-            self.METHOD_ATTR.Hidden.DEFAULT = 'false';
-            self.METHOD_ATTR.Sealed.DEFAULT = 'false';
+            self.METHOD_ATTR.Access.DEFAULT   = 'public';
+            self.METHOD_ATTR.Hidden.DEFAULT   = 'false';
+            self.METHOD_ATTR.Sealed.DEFAULT   = 'false';
             
             
             % Define the regular expressions used in parsing:
@@ -166,6 +166,10 @@ classdef (Abstract = false) m2md < handle
                     % Get the class settings
                     cdef_line = strtrim(msource(i1(1):i2(1)));
                     
+                    % Get the SuperClass
+                    idx = strfind(cdef_line,'<');
+                    self.SUPERCLASS = strtrim(cdef_line(idx+1:end));
+                    
                     % Get the attributes:
                     self.getCLASS_ATTR(cdef_line);
                     
@@ -178,10 +182,10 @@ classdef (Abstract = false) m2md < handle
                     [m1,m2] = self.removeComments(m1,m2);
                     
                     % Parse the property lines:
-                    num_props = 1;
                     if isempty(p1)
                         % TODO: What to do if no properties are given?
                     else
+                        num_props = 1;
                         for jj = 1:length(p1)
                             prop_line = strtrim(msource(p1(jj):p2(jj)));
                             
@@ -226,25 +230,62 @@ classdef (Abstract = false) m2md < handle
                                     self.PROPERTIES{num_props} = {prop_name,self.PROP_ATTR,comment};
                                     num_props = num_props+1;
                                 end
-                                
                             end
                         end
                     end
                     
                     % Get the method lines:
-                    for jj = 1:length(m1)
-                        disp(strtrim(msource(m1(jj):m2(jj))))
-                        if jj == length(m1)
-                            msource_range = msource(m2(jj):end);
-                            [f1,f2] = regexp(msource_range,def_exp('function'),'matchcase');
-                            for kk = 1:length(f1)
-                                disp(strtrim(msource_range(f1(kk):f2(kk))));
-                            end
-                        else
-                            msource_range = msource(m2(jj):m2(jj+1));
-                            [f1,f2] = regexp(msource_range,def_exp('function'),'matchcase');
-                            for kk = 1:length(f1)
-                                disp(strtrim(msource_range(f1(kk):f2(kk))));
+                    if isempty(m1)
+                        % TODO: What to do if no methods given?
+                    else
+                        num_funcs = 1;
+                        for jj = 1:length(m1)
+                            method_line = strtrim(msource(m1(jj):m2(jj)));
+                            disp(method_line)
+                            % Get the method attributes:
+                            self.getMETHOD_ATTR(method_line);
+                            if jj == length(m1)
+                                m_temp = msource(m2(jj):end);
+                                [f1,f2] = regexp(m_temp,def_exp('function'),'matchcase');
+                                for kk = 1:length(f1)
+                                    func_line = strtrim(m_temp(f1(kk):f2(kk)));
+                                    if kk == length(f1)
+                                        m_temp2 = m_temp(f1(kk):end);
+                                    else
+                                        m_temp2 = m_temp(f1(kk):f1(kk+1));
+                                    end
+                                    method = self.parseFunction(func_line,m_temp2);
+                                    if strcmp(method.FUNCTION,self.FILENAME)
+                                        self.CONSTRUCTOR = method;
+                                        self.CONSTRUCTOR.ATTRIBUTES = self.METHOD_ATTR;
+                                    else
+                                        self.METHODS{num_funcs} = method;
+                                        self.METHODS{num_funcs}.ATTRIBUTES = self.METHOD_ATTR;
+                                        num_funcs = num_funcs+1;
+                                    end
+                                    disp(strtrim(m_temp(f1(kk):f2(kk))))
+                                end
+                            else
+                                m_temp = msource(m2(jj):m2(jj+1));
+                                [f1,f2] = regexp(m_temp,def_exp('function'),'matchcase');
+                                for kk = 1:length(f1)
+                                    func_line = strtrim(m_temp(f1(kk):f2(kk)));
+                                    if kk == length(f1)
+                                        m_temp2 = m_temp(f1(kk):end);
+                                    else
+                                        m_temp2 = m_temp(f1(kk):f1(kk+1));
+                                    end
+                                    method = self.parseFunction(func_line,m_temp2);
+                                    if strcmp(method.FUNCTION,self.FILENAME)
+                                        self.CONSTRUCTOR = method;
+                                        self.CONSTRUCTOR.ATTRIBUTES = self.METHOD_ATTR;
+                                    else
+                                        self.METHODS{num_funcs} = method;
+                                        self.METHODS{num_funcs}.ATTRIBUTES = self.METHOD_ATTR;
+                                        num_funcs = num_funcs+1;
+                                    end
+                                    disp(strtrim(m_temp(f1(kk):f2(kk))))
+                                end
                             end
                         end
                     end
@@ -317,9 +358,33 @@ classdef (Abstract = false) m2md < handle
                 end
             end
         end
-    end
+        
+        function [] = getMETHOD_ATTR(self,method_line)
+            fn = fieldnames(self.METHOD_ATTR);
+            for jj = 1:length(fn)
+                self.METHOD_ATTR.(fn{jj}).SET = self.METHOD_ATTR.(fn{jj}).DEFAULT;
+            end
+            if contains(method_line,'(')
+                if contains(method_line,',')
+                    for jj = 1:length(fn)
+                        bounds = strtrim(erase(extractBetween(method_line,fn{jj},','),'='));
+                        if ~isempty(bounds)
+                            self.METHOD_ATTR.(fn{jj}).SET = bounds{1};
+                        end
+                    end
+                else
+                    % Only a single attribute definition was given:
+                    for jj = 1:length(fn)
+                        bounds = strtrim(erase(extractBetween(method_line,fn{jj},')'),'='));
+                        if ~isempty(bounds)
+                            self.METHOD_ATTR.(fn{jj}).SET = bounds{1};
+                            break
+                        end
+                    end
+                end
+            end
+        end
     
-    methods (Access = private)
         function [i1,i2] = removeComments(self,i1,i2)
            remove = false(size(i1));
             for ii = 1:length(i1)
@@ -328,13 +393,98 @@ classdef (Abstract = false) m2md < handle
             i1(remove) = [];
             i2(remove) = []; 
         end
-        
-        function [TYPE] = getType(self,msource)
-            
-        end
     end
     
     methods (Access = private, Static = true)
+        function square
+            % NAME>{Square}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
+            disp('Testing an obnoxious function')
+        end
+        
+        function [a b] = circle
+            % NAME>{Circle}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
+            disp('Testing an even more obnoxious function')
+        end
+        
+        function [a b] = triangle(a, b)
+            % NAME>{Triangle}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
+        end
+        
+        function [outstruct] = parseFunction(func_line,msource)   
+            % NAME>{Parse Function}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
+            % Remove comments (if any on line):
+            idx = strfind(func_line,'%');
+            func_line(idx:end)=[];
+            
+            if contains(func_line,'=')
+                outputs_raw = extractBetween(func_line,'function','=');
+                outputs_raw = strtrim(outputs_raw{1});
+                % Remove brackets if they exist
+                if contains(outputs_raw,'[')
+                    outputs_raw = outputs_raw(2:end-1);
+                end
+                if contains(outputs_raw,',')
+                    outputs = split(outputs_raw,',');
+                else
+                    outputs = split(outputs_raw);
+                end
+                
+                idx = strfind(func_line,'=');
+                temp = func_line(idx+1:end);
+            else
+                temp = func_line(9:end);
+                outputs = {''};
+            end
+            
+            if contains(temp,'(')
+                inputs_raw = extractBetween(temp,'(',')');
+                inputs_raw = strtrim(inputs_raw{1});
+                if contains(inputs_raw,',')
+                    inputs = split(inputs_raw,',');
+                else
+                    inputs = split(inputs_raw);
+                end
+                idx = strfind(temp,'(');
+                func = strtrim(temp(1:idx-1));
+            else
+                inputs = {''};
+                func = strtrim(temp);
+            end
+            
+            % Store the results:
+            outstruct.FUNCTION = func;
+            outstruct.OUTPUTS = outputs;
+            outstruct.INPUTS = inputs;
+            
+            % Extract the annotations from the function source code:
+            outstruct.NAME = extractBetween(msource,'NAME>{','}');
+            if ~isempty(outstruct.NAME)
+                outstruct.NAME = outstruct.NAME{1};
+            else
+                outstruct.NAME = '';
+            end
+            outstruct.BRIEF = extractBetween(msource,'BRIEF>{','}');
+            if ~isempty(outstruct.BRIEF)
+                outstruct.BRIEF = outstruct.BRIEF{1};
+            else
+                outstruct.BRIEF = '';
+            end
+            outstruct.DESCRIPTION = extractBetween(msource,'DESCRIPTION>{','}');
+            if ~isempty(outstruct.DESCRIPTION)
+                outstruct.DESCRIPTION = outstruct.DESCRIPTION{1};
+            else
+                outstruct.DESCRIPTION = '';
+            end
+        end
+        
         function [mfiles_rel,mfiles_full] = getMfiles(InputMfiles)
             if iscell(InputMfiles)
                 assert(numel(InputMfiles) == size(InputMfiles,1)*size(InputMfiles,2),...
@@ -372,6 +522,15 @@ classdef (Abstract = false) m2md < handle
                 string = 'True';
             else
                 string = 'False';
+            end
+        end
+        
+        function [bool] = str2bool(string)
+            switch string
+                case 'false'
+                    bool = false;
+                case 'true'
+                    bool = true;
             end
         end
     end
