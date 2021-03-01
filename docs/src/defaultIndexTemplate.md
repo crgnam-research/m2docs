@@ -1,6 +1,12 @@
-# script: generateDocs
+# function: defaultIndexTemplate
 
-**Generate Documentation**: Script to call m2md and generate markdown documentation
+**Default Template**: Template for use with m2md
+
+**Inputs:**: 
+
+**Outputs:**: 
+
+ ***
 
 ## Sub-Functions
 
@@ -13,7 +19,7 @@
 ## Detailed Description
 
 
- A more detailed description can go here. 
+ A more detailed description can go here two.
 
 
  ***
