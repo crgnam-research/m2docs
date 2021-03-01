@@ -2,7 +2,7 @@
 
 **Default Template**: Template for use with m2md
 
-**Inputs:**: data
+**Inputs:**: m2mdData
 
 **Outputs:**: 
 

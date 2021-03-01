@@ -15,6 +15,13 @@ classdef m2md < handle
         OutputMD_name
         Template
         
+        % Index Generation:
+        MakeMainIndex
+        MainIndexName
+        MakeSubIndices
+        SubIndexName
+        SubIndexUseDirName
+        
         % Generic Data:
         TYPE % Type of m-file that was loaded
         FILENAME %
@@ -48,14 +55,42 @@ classdef m2md < handle
             validInputPath = @(x) ischar(x) || iscell(x);
             validOutputPath = @(x) ischar(x);
             validTemp = @(x) isa(x,'function_handle');
-            defaultTemplate = 'defaultTemplate.m';
+            validBool = @(x) isa(x,'logical');
+            validIndex = @(x) ischar(x) && (contains(x,'.md') || strcmp(x,'DIRNAME'));
+            defaultTemplate = '@defaultTemplate';
+            defaultIndex = true;
+            defaultMainIndex = 'docs.md';
+            defaultSIname = 'index.md';
+            defaultIndexTemplate = @defaultIndexTemplate;
+            defaultSubTemplate = @defaultIndexTemplate;
             
             % Parse the inputs:
             p = inputParser;
                 addRequired(p,'InputMfiles',validInputPath);
                 addRequired(p,'OutputMDdir',validOutputPath)
                 addOptional(p,'Template',defaultTemplate,validTemp);
+                addOptional(p,'MakeMainIndex',defaultIndex,validBool);
+                addOptional(p,'MainIndexName',defaultMainIndex,validIndex);
+                addOptional(p,'MakeSubIndices',defaultIndex,validBool);
+                addOptional(p,'SubIndexName',defaultSIname,validIndex);
+                addOptional(p,'MainIndexTemplate',defaultIndexTemplate,validTemp);
+                addOptional(p,'SubIndexTemplate',defaultSubTemplate,validTemp);
             parse(p,InputMfiles,OutputMDdir,varargin{:});
+            
+            % Process the index settings
+            self.MakeMainIndex = p.Results.MakeMainIndex;
+            if self.MakeMainIndex
+                self.MainIndexName = p.Results.MainIndexName;
+            end
+            self.MakeSubIndices = p.Results.MakeSubIndices;
+            if self.MakeSubIndices
+                self.SubIndexName = p.Results.SubIndexName;
+                if strcmp(self.SubIndexName,'DIRNAME')
+                    self.SubIndexUseDirName = true;
+                else
+                    self.SubIndexUseDirName = false;
+                end
+            end
             
             % Get a list of all input .m files:
             [mfiles_rel,mfiles_full] = self.getMfiles(p.Results.InputMfiles);
@@ -326,6 +361,15 @@ classdef m2md < handle
                 
                 % Write the markdown file based on the provided template:
                 self.Template(self);
+            end
+            
+            % Generate Index Files if asked for
+            if self.MakeMainIndex
+                
+            end
+            
+            if self.MakeSubIndices
+                
             end
         end
     end

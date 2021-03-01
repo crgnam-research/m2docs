@@ -24,6 +24,11 @@ default
 | OutputMDdir_full | default |  |
 | OutputMD_name | default |  |
 | Template | default |  |
+| MakeMainIndex | default |  |
+| MainIndexName | default |  |
+| MakeSubIndices | default |  |
+| SubIndexName | default |  |
+| SubIndexUseDirName | default |  |
 | TYPE | default | Type of m-file that was loaded |
 | FILENAME | default |  |
 | BCOMMENTS_INDS | default | Indices of block comment sections |
