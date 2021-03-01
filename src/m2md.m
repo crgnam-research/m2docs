@@ -511,7 +511,6 @@ classdef m2md < handle
             end
             
             if contains(temp,'(')
-                disp(temp)
                 inputs_raw = extractBetween(temp,'(',')');
                 inputs_raw = strtrim(inputs_raw{1});
                 if contains(inputs_raw,',')
