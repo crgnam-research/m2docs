@@ -49,7 +49,7 @@ default
 
 | Constructor | Attributes | Inputs | Outputs | Brief Description |
 | ----------- | ---------- | ------ | ------- | ----------------- |
-| [m2md](###m2md) | default | InputMfiles, OutputMDdir, varargin | self | Brief Description Goes Here |
+| [m2md](#m2md) | default | InputMfiles, OutputMDdir, varargin | self | Brief Description Goes Here |
 
 
  ***
@@ -58,13 +58,13 @@ default
 
 | Method | Attributes | Inputs | Outputs | Brief Description |
 | ------ | ---------- | ------ | ------- | ----------------- |
-| [getCLASS_ATTR](###getCLASS_ATTR) | (Access = *private*) | self, cdef_line |  | Brief Description Goes Here |
-| [getPROP_ATTR](###getPROP_ATTR) | (Access = *private*) | self, prop_line | custom | Brief Description Goes Here |
-| [getMETHOD_ATTR](###getMETHOD_ATTR) | (Access = *private*) | self, method_line |  | Brief Description Goes Here |
-| [removeComments](###removeComments) | (Access = *private*) | self, i1, i2 | i1, i2 | Brief Description Goes Here |
-| [parseFunction](###parseFunction) | (Access = *private*) | func_line, msource | outstruct | Brief Description Goes Here |
-| [getMfiles](###getMfiles) | (Access = *private*) | InputMfiles | mfiles_rel, mfiles_full | Brief Description Goes Here |
-| [bool2str](###bool2str) | (Access = *private*) | bool | string | Brief Description Goes Here |
+| [getCLASS_ATTR](#getCLASS_ATTR) | (Access = *private*) | self, cdef_line |  | Brief Description Goes Here |
+| [getPROP_ATTR](#getPROP_ATTR) | (Access = *private*) | self, prop_line | custom | Brief Description Goes Here |
+| [getMETHOD_ATTR](#getMETHOD_ATTR) | (Access = *private*) | self, method_line |  | Brief Description Goes Here |
+| [removeComments](#removeComments) | (Access = *private*) | self, i1, i2 | i1, i2 | Brief Description Goes Here |
+| [parseFunction](#parseFunction) | (Access = *private*) | func_line, msource | outstruct | Brief Description Goes Here |
+| [getMfiles](#getMfiles) | (Access = *private*) | InputMfiles | mfiles_rel, mfiles_full | Brief Description Goes Here |
+| [bool2str](#bool2str) | (Access = *private*) | bool | string | Brief Description Goes Here |
 
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)
