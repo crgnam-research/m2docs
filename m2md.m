@@ -1,38 +1,11 @@
-%% NAME>{Matlab 2 Markdown}
+% NAME>{Matlab 2 Markdown}
 %
 % BRIEF>{Utility for creating markdown documentation from a Matlab M-file}
 %
 % DESCRIPTION>{
 % A more detailed description can go here. 
-% ### Section 1
-% You can use limited markdown syntax exactly in here.  Just make sure that
-% you recognize that:
-% - You can only use level 3 sections or higher
-% - This section is entire entered into the "Detailed Description" section
-% exactly as it appears here (it is copied verbatim)
-% - You must remember to add a closing bracket.
-% 
-% ### Section 2
-% You can use [links](google.com) as well
-% }
-%{
-More block comments
-because I enjoy the challenge 
 %}
-
-%{
-going
-to
-test
-this
- classdef m2md
-beacuse
-it
-is
-annoying
-%}
-    
-classdef (Abstract = false) m2md < handle
+classdef m2md < handle
     properties (Access = public)
         % Inputs (set by user):
         InputMfiles_rel
@@ -44,20 +17,18 @@ classdef (Abstract = false) m2md < handle
         
         % Generic Data:
         TYPE % Type of m-file that was loaded
-        FILENAME
+        FILENAME %
         BCOMMENTS_INDS % Indices of block comment sections
-        
-        % OTHER:
         leading_comments
-        
-        % TYPE==SCRIPT: Data extracted from the m file:
-        
-        % TYPE==FUNCTION: Data extracted from the m file:
-        
-        % TYPE==CLASS: Data extracted from the m file:
         NAME
         BRIEF
         DESCRIPTION
+        
+        % TYPE==FUNCTION: Data extracted from the m file:
+        FUNCTION
+        SUBFUNCTIONS
+        
+        % TYPE==CLASS: Data extracted from the m file:
         CLASS_ATTR
         SUPERCLASS
         PROPERTIES
@@ -67,13 +38,12 @@ classdef (Abstract = false) m2md < handle
         METHOD_ATTR
     end
     
-    properties (Access = private,Constant = true)
-        seven = 2
-        six = 5
-    end
-    
     methods (Access = public)
         function [self] = m2md(InputMfiles,OutputMDdir,varargin)
+            % NAME>{Matlab to Markdown}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
+            
             % Define defaults:
             validInputPath = @(x) ischar(x) || iscell(x);
             validOutputPath = @(x) ischar(x);
@@ -98,34 +68,44 @@ classdef (Abstract = false) m2md < handle
             self.InputMfiles_full = mfiles_full;
             self.OutputMDdir_rel  = outputmd_dir_rel;
             self.OutputMDdir_full = outputmd_dir_full;
-            self.Template    = p.Results.Template;
-            
-            % Set the default values of supported Class Attributes:
-            self.CLASS_ATTR.Abstract.DEFAULT = 'false';
-            self.CLASS_ATTR.ConstructOnLoad.DEFAULT = 'false';
-            self.CLASS_ATTR.HandleCompatible.DEFAULT = 'false';
-            self.CLASS_ATTR.Hidden.DEFAULT = 'false';
-            self.CLASS_ATTR.Sealed.DEFAULT = 'false';
-            
-            % Set the default values of supported Property Attributes:
-            self.PROP_ATTR.Constant.DEFAULT = 'false';
-            self.PROP_ATTR.Hidden.DEFAULT   = 'false';
-            self.PROP_ATTR.Access.DEFAULT   = 'public';
-            
-            % Set the default values of supporter Method Attributes:
-            self.METHOD_ATTR.Abstract.DEFAULT = 'false';
-            self.METHOD_ATTR.Access.DEFAULT   = 'public';
-            self.METHOD_ATTR.Hidden.DEFAULT   = 'false';
-            self.METHOD_ATTR.Sealed.DEFAULT   = 'false';
-            
+            self.Template    = p.Results.Template;            
             
             % Define the regular expressions used in parsing:
             def_exp  = @(KEYWORD) ['(\r\n|\r|\n)(?<!%)\s*',KEYWORD,'.*?(\r\n|\r|\n)'];
-            cdef_exp = @(TYPE,NAME) ['(\r\n|\r|\n)(?<!%)\s*',TYPE,'.*?',NAME,'.*?(\r\n|\r|\n)'];
+            cdef_exp = @(TYPE,NAME) ['(\r\n|\r|\n)*(?<!%)\s*',TYPE,'.*?',NAME,'.*?(\r\n|\r|\n)'];
             block_comments_exp = '%{.*?%}';
             
             % Run the actual documentation process
             for ii = 1:length(self.InputMfiles_rel)
+                % RESET:
+                self.FUNCTION = struct();
+                self.SUBFUNCTIONS = {};
+                self.CLASS_ATTR = {};
+                self.SUPERCLASS = {};
+                self.PROPERTIES = {};
+                self.PROP_ATTR = {};
+                self.CONSTRUCTOR = {};
+                self.METHODS = {};
+                self.METHOD_ATTR = {};
+                
+                % Set the default values of supported Class Attributes:
+                self.CLASS_ATTR.Abstract.DEFAULT = 'false';
+                self.CLASS_ATTR.ConstructOnLoad.DEFAULT = 'false';
+                self.CLASS_ATTR.HandleCompatible.DEFAULT = 'false';
+                self.CLASS_ATTR.Hidden.DEFAULT = 'false';
+                self.CLASS_ATTR.Sealed.DEFAULT = 'false';
+
+                % Set the default values of supported Property Attributes:
+                self.PROP_ATTR.Constant.DEFAULT = 'false';
+                self.PROP_ATTR.Hidden.DEFAULT   = 'false';
+                self.PROP_ATTR.Access.DEFAULT   = 'public';
+
+                % Set the default values of supporter Method Attributes:
+                self.METHOD_ATTR.Abstract.DEFAULT = 'false';
+                self.METHOD_ATTR.Access.DEFAULT   = 'public';
+                self.METHOD_ATTR.Hidden.DEFAULT   = 'false';
+                self.METHOD_ATTR.Sealed.DEFAULT   = 'false';
+        
                 % Get the filename:
                 [~,self.FILENAME] = fileparts(self.InputMfiles_full{ii});
                 self.OutputMD_name = [self.FILENAME,'.md'];
@@ -136,11 +116,11 @@ classdef (Abstract = false) m2md < handle
                 self.BCOMMENTS_INDS = [i1',i2'];
                 
                 % Determine the type and get def line:
-                [i1,i2] = regexp(msource,cdef_exp('classdef','m2md'),'matchcase');
+                [i1,i2] = regexp(msource,cdef_exp('classdef',self.FILENAME),'matchcase');
                 [i1,i2] = self.removeComments(i1,i2);
                 if isempty(i1)
                     % It is not a class, check if it is a function:
-                    [i1,i2] = regexp(msource,cdef_exp('function','m2md'),'matchcase');
+                    [i1,i2] = regexp(msource,cdef_exp('function',self.FILENAME),'matchcase');
                     [i1,i2] = self.removeComments(i1,i2);
                     if isempty(i1)
                        % It is not a class or a function, so it is a script
@@ -152,17 +132,36 @@ classdef (Abstract = false) m2md < handle
                     self.TYPE = 'CLASS';
                 end
                 
-                % Parse each depending on its type:
-                if strcmp(self.TYPE,'CLASS')
-                    % Get the leading comment data:
+                % Read the leading comment data:
+                if ~isempty(i1)
                     lead_comments = erase(msource(1:i1-1),'%');
-                    self.NAME  = extractBetween(lead_comments,'NAME>{','}');
-                    self.NAME  = self.NAME{1};
-                    self.BRIEF = extractBetween(lead_comments,'BRIEF>{','}');
+                else
+                    lead_comments = msource;
+                end
+                self.NAME  = extractBetween(lead_comments,'NAME>{','}');
+                if ~isempty(self.NAME)
+                    self.NAME = self.NAME{1};
+                    self.NAME = erase(self.NAME,'%');
+                else
+                    self.NAME = '';
+                end
+                self.BRIEF = extractBetween(lead_comments,'BRIEF>{','}');
+                if ~isempty(self.BRIEF)
                     self.BRIEF = self.BRIEF{1};
-                    self.DESCRIPTION = extractBetween(lead_comments,'DESCRIPTION>{','}');
+                    self.BRIEF = erase(self.BRIEF,'%');
+                else
+                    self.BRIEF = '';
+                end
+                self.DESCRIPTION = extractBetween(lead_comments,'DESCRIPTION>{','}');
+                if ~isempty(self.DESCRIPTION)
                     self.DESCRIPTION = self.DESCRIPTION{1};
-                    
+                    self.DESCRIPTION = erase(self.DESCRIPTION,'%');
+                else
+                    self.DESCRIPTION = '';
+                end
+                
+                % Parse each depending on its type:
+                if strcmp(self.TYPE,'CLASS')                   
                     % Get the class settings
                     cdef_line = strtrim(msource(i1(1):i2(1)));
                     
@@ -241,7 +240,6 @@ classdef (Abstract = false) m2md < handle
                         num_funcs = 1;
                         for jj = 1:length(m1)
                             method_line = strtrim(msource(m1(jj):m2(jj)));
-                            disp(method_line)
                             % Get the method attributes:
                             self.getMETHOD_ATTR(method_line);
                             if jj == length(m1)
@@ -263,7 +261,6 @@ classdef (Abstract = false) m2md < handle
                                         self.METHODS{num_funcs}.ATTRIBUTES = self.METHOD_ATTR;
                                         num_funcs = num_funcs+1;
                                     end
-                                    disp(strtrim(m_temp(f1(kk):f2(kk))))
                                 end
                             else
                                 m_temp = msource(m2(jj):m2(jj+1));
@@ -284,17 +281,47 @@ classdef (Abstract = false) m2md < handle
                                         self.METHODS{num_funcs}.ATTRIBUTES = self.METHOD_ATTR;
                                         num_funcs = num_funcs+1;
                                     end
-                                    disp(strtrim(m_temp(f1(kk):f2(kk))))
                                 end
                             end
                         end
                     end
                     
                 elseif strcmp(self.TYPE,'FUNCTION')
-                    
+                    [f1,f2] = regexp(msource,def_exp('function'),'matchcase');
+                    num_subf = 1;
+                    for jj = 1:length(f1)
+                        func_line = msource(f1(jj):f2(jj));
+                        if jj == length(f1)
+                            m_temp2 = msource(f1(jj):end);
+                        else
+                            m_temp2 = msource(f1(jj):f1(jj+1));
+                        end
+                        func = self.parseFunction(func_line,m_temp2);
+                        
+                        if strcmp(func.FUNCTION,self.FILENAME)
+                            self.FUNCTION = func;
+                            self.FUNCTION.NAME = self.NAME;
+                            self.FUNCTION.BRIEF = self.BRIEF;
+                            self.FUNCTION.DESCRIPTION = self.DESCRIPTION;
+                        else
+                            self.SUBFUNCTIONS{num_subf} = func;
+                            num_subf = num_subf+1;
+                        end
+                    end
                     
                 elseif strcmp(self.TYPE,'SCRIPT')
-                    
+                    [f1,f2] = regexp(msource,def_exp('function'),'matchcase');
+                    num_subf = 1;
+                    for jj = 1:length(f1)
+                        func_line = msource(f1(jj):f2(jj));
+                        if jj == length(f1)
+                            m_temp2 = msource(f1(jj):end);
+                        else
+                            m_temp2 = msource(f1(jj):f1(jj+1));
+                        end
+                        self.SUBFUNCTIONS{num_subf} = self.parseFunction(func_line,m_temp2);
+                        num_subf = num_subf+1;
+                    end
                 end
                 
                 % Write the markdown file based on the provided template:
@@ -305,6 +332,9 @@ classdef (Abstract = false) m2md < handle
     
     methods (Access = private)
         function [] = getCLASS_ATTR(self,cdef_line)
+            % NAME>{Get Class Attributes}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
             fn = fieldnames(self.CLASS_ATTR);
             for jj = 1:length(fn)
                 self.CLASS_ATTR.(fn{jj}).SET = self.CLASS_ATTR.(fn{jj}).DEFAULT;
@@ -332,6 +362,9 @@ classdef (Abstract = false) m2md < handle
         
         
         function [custom] = getPROP_ATTR(self,prop_line)
+            % NAME>{Get Property Attributes}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
             custom = false;
             fn = fieldnames(self.PROP_ATTR);
             for jj = 1:length(fn)
@@ -360,6 +393,9 @@ classdef (Abstract = false) m2md < handle
         end
         
         function [] = getMETHOD_ATTR(self,method_line)
+            % NAME>{Get Method Attributes}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
             fn = fieldnames(self.METHOD_ATTR);
             for jj = 1:length(fn)
                 self.METHOD_ATTR.(fn{jj}).SET = self.METHOD_ATTR.(fn{jj}).DEFAULT;
@@ -386,36 +422,21 @@ classdef (Abstract = false) m2md < handle
         end
     
         function [i1,i2] = removeComments(self,i1,i2)
-           remove = false(size(i1));
-            for ii = 1:length(i1)
-                remove(ii) = any(i1(ii)>self.BCOMMENTS_INDS(:,1) & i1(ii)<self.BCOMMENTS_INDS(:,2));
+            % NAME>{Remove Comments}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
+            if ~isempty(self.BCOMMENTS_INDS)
+                remove = false(size(i1));
+                for ii = 1:length(i1)
+                    remove(ii) = any(i1(ii)>self.BCOMMENTS_INDS(:,1) & i1(ii)<self.BCOMMENTS_INDS(:,2));
+                end
+                i1(remove) = [];
+                i2(remove) = []; 
             end
-            i1(remove) = [];
-            i2(remove) = []; 
         end
     end
     
-    methods (Access = private, Static = true)
-        function square
-            % NAME>{Square}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
-            disp('Testing an obnoxious function')
-        end
-        
-        function [a b] = circle
-            % NAME>{Circle}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
-            disp('Testing an even more obnoxious function')
-        end
-        
-        function [a b] = triangle(a, b)
-            % NAME>{Triangle}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
-        end
-        
+    methods (Access = private, Static = true)        
         function [outstruct] = parseFunction(func_line,msource)   
             % NAME>{Parse Function}
             % BRIEF>{Brief Description Goes Here}
@@ -486,6 +507,9 @@ classdef (Abstract = false) m2md < handle
         end
         
         function [mfiles_rel,mfiles_full] = getMfiles(InputMfiles)
+            % NAME>{getMfiles}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
             if iscell(InputMfiles)
                 assert(numel(InputMfiles) == size(InputMfiles,1)*size(InputMfiles,2),...
                        'Batch input must be with a 1xN or Nx1 cell array');
@@ -518,19 +542,13 @@ classdef (Abstract = false) m2md < handle
         end
         
         function [string] = bool2str(bool)
+            % NAME>{bool2str}
+            % BRIEF>{Brief Description Goes Here}
+            % DESCRIPTION>{Detailed Description Goes Here}
             if bool
                 string = 'True';
             else
                 string = 'False';
-            end
-        end
-        
-        function [bool] = str2bool(string)
-            switch string
-                case 'false'
-                    bool = false;
-                case 'true'
-                    bool = true;
             end
         end
     end

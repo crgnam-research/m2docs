@@ -31,6 +31,8 @@ default
 | NAME | default |  |
 | BRIEF | default |  |
 | DESCRIPTION | default |  |
+| FUNCTION | default |  |
+| SUBFUNCTIONS | default |  |
 | CLASS_ATTR | default |  |
 | SUPERCLASS | default |  |
 | PROPERTIES | default |  |
@@ -38,8 +40,6 @@ default
 | CONSTRUCTOR | default |  |
 | METHODS | default |  |
 | METHOD_ATTR | default |  |
-| seven = 2 | (Access = *private*) |  |
-| six = 5 | (Access = *private*) |  |
 
 [*Default Property Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html)
 
@@ -49,7 +49,7 @@ default
 
 | Constructor | Attributes | Inputs | Outputs | Brief Description |
 | ----------- | ---------- | ------ | ------- | ----------------- |
-| [m2md](###m2md) | default | InputMfiles, OutputMDdir, varargin | self | ',' |
+| [m2md](###m2md) | default | InputMfiles, OutputMDdir, varargin | self | Brief Description Goes Here |
 
 
  ***
@@ -58,17 +58,13 @@ default
 
 | Method | Attributes | Inputs | Outputs | Brief Description |
 | ------ | ---------- | ------ | ------- | ----------------- |
-| [getCLASS_ATTR](###getCLASS_ATTR) | (Access = *private*) | self, cdef_line |  |  |
-| [getPROP_ATTR](###getPROP_ATTR) | (Access = *private*) | self, prop_line | custom |  |
-| [getMETHOD_ATTR](###getMETHOD_ATTR) | (Access = *private*) | self, method_line |  |  |
-| [removeComments](###removeComments) | (Access = *private*) | self, i1, i2 | i1, i2 |  |
-| [square](###square) | (Access = *private*) |  |  | Brief Description Goes Here |
-| [circle](###circle) | (Access = *private*) |  | a, b | Brief Description Goes Here |
-| [triangle](###triangle) | (Access = *private*) | a,  b | a, b | Brief Description Goes Here |
+| [getCLASS_ATTR](###getCLASS_ATTR) | (Access = *private*) | self, cdef_line |  | Brief Description Goes Here |
+| [getPROP_ATTR](###getPROP_ATTR) | (Access = *private*) | self, prop_line | custom | Brief Description Goes Here |
+| [getMETHOD_ATTR](###getMETHOD_ATTR) | (Access = *private*) | self, method_line |  | Brief Description Goes Here |
+| [removeComments](###removeComments) | (Access = *private*) | self, i1, i2 | i1, i2 | Brief Description Goes Here |
 | [parseFunction](###parseFunction) | (Access = *private*) | func_line, msource | outstruct | Brief Description Goes Here |
-| [getMfiles](###getMfiles) | (Access = *private*) | InputMfiles | mfiles_rel, mfiles_full |  |
-| [bool2str](###bool2str) | (Access = *private*) | bool | string |  |
-| [str2bool](###str2bool) | (Access = *private*) | string | bool |  |
+| [getMfiles](###getMfiles) | (Access = *private*) | InputMfiles | mfiles_rel, mfiles_full | Brief Description Goes Here |
+| [bool2str](###bool2str) | (Access = *private*) | bool | string | Brief Description Goes Here |
 
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)
@@ -79,17 +75,7 @@ default
 
 
  A more detailed description can go here. 
- ### Section 1
- You can use limited markdown syntax exactly in here.  Just make sure that
- you recognize that:
- - You can only use level 3 sections or higher
- - This section is entire entered into the "Detailed Description" section
- exactly as it appears here (it is copied verbatim)
- - You must remember to add a closing bracket.
- 
- ### Section 2
- You can use [links](google.com) as well
- 
+
 
  ***
 
@@ -99,7 +85,7 @@ default
 
 **[self] = m2md(InputMfiles, OutputMDdir, varargin)**
 
-DESCRIPTION: ','
+DESCRIPTION: Detailed Description Goes Here
 
  ***
 
@@ -109,35 +95,20 @@ DESCRIPTION: ','
 
 **[] = getCLASS_ATTR(self, cdef_line)**
 
-DESCRIPTION: 
+DESCRIPTION: Detailed Description Goes Here
 ### getPROP_ATTR
 
 **[custom] = getPROP_ATTR(self, prop_line)**
 
-DESCRIPTION: 
+DESCRIPTION: Detailed Description Goes Here
 ### getMETHOD_ATTR
 
 **[] = getMETHOD_ATTR(self, method_line)**
 
-DESCRIPTION: 
+DESCRIPTION: Detailed Description Goes Here
 ### removeComments
 
 **[i1, i2] = removeComments(self, i1, i2)**
-
-DESCRIPTION: 
-### square
-
-**[] = square()**
-
-DESCRIPTION: Detailed Description Goes Here
-### circle
-
-**[a, b] = circle()**
-
-DESCRIPTION: Detailed Description Goes Here
-### triangle
-
-**[a, b] = triangle(a,  b)**
 
 DESCRIPTION: Detailed Description Goes Here
 ### parseFunction
@@ -149,14 +120,9 @@ DESCRIPTION: Detailed Description Goes Here
 
 **[mfiles_rel, mfiles_full] = getMfiles(InputMfiles)**
 
-DESCRIPTION: 
+DESCRIPTION: Detailed Description Goes Here
 ### bool2str
 
 **[string] = bool2str(bool)**
 
-DESCRIPTION: 
-### str2bool
-
-**[bool] = str2bool(string)**
-
-DESCRIPTION: 
+DESCRIPTION: Detailed Description Goes Here
