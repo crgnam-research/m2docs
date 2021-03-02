@@ -33,7 +33,7 @@ function [] = defaultIndexTemplate(rel_path,name)
         
         if ~isempty(subdirs)
             for ii = 1:length(subdirs)
-                body = sprintf([body,'- [%s/](%s)\n'],subdirs(ii).name,[rel_path,'/',subdirs(ii).name,'_index.md']);
+                body = sprintf([body,'- [%s/](%s)\n'],subdirs(ii).name,[subdirs(ii).name,'/',subdirs(ii).name,'_index.md']);
             end
         end
     end
