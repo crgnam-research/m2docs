@@ -8,7 +8,7 @@
 **A Utility for Generating Markdown Documentation for MATLAB**
 
 ## Overview
-This project was started as a way to maintain documentation for the [Spacecraft-Navigation-Toolbox](www.sntoolbox.com).  
+This project was started as a way to maintain documentation for the [Spacecraft-Navigation-Toolbox (SNT)](https://github.com/crgnam-research/spacecraft-navigation-toolbox).  The documentation for SNT can be found at www.sntoolbox.com
 
 ## Features
 - Supported .m file types:
