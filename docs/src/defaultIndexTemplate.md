@@ -5,9 +5,9 @@
 
 **Default Index Template**: Defines how each index file is to be formatted
 
-**Inputs:**: rel_path, name
+**Inputs:** rel_path, name
 
-**Outputs:**: 
+**Outputs:** 
 
  ***
 
@@ -40,4 +40,4 @@ DESCRIPTION:
 
 ***
 
-*Generated on 01-Mar-2021 22:17:41 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 01-Mar-2021 22:22:00 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

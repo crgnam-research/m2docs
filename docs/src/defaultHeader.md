@@ -5,9 +5,9 @@
 
 **Default Header**: Defines the header text for each markdown file
 
-**Inputs:**: path
+**Inputs:** path
 
-**Outputs:**: header
+**Outputs:** header
 
  ***
 
@@ -32,4 +32,4 @@
 
 ***
 
-*Generated on 01-Mar-2021 22:17:41 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 01-Mar-2021 22:22:00 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

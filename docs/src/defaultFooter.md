@@ -5,9 +5,9 @@
 
 **Default Footer**: Defines the footer text for each markdown file
 
-**Inputs:**: 
+**Inputs:** 
 
-**Outputs:**: footer
+**Outputs:** footer
 
  ***
 
@@ -32,4 +32,4 @@
 
 ***
 
-*Generated on 01-Mar-2021 22:17:40 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 01-Mar-2021 22:22:00 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
