@@ -123,7 +123,7 @@ function [] = defaultTemplate(m2mdData)
     if m2mdData.INCLUDE_CODE
         msource = m2mdData.MSOURCE;
         code = sprintf('```matlab \n %s \n ```',msource);
-        markdown = sprintf('%s \n *** \n\n # Source Code:\n\n %s \n ',markdown,code);
+        markdown = sprintf('%s \n *** \n\n# Source Code:\n\n %s \n ',markdown,code);
     end
     
     % Format the final output markdown:
