@@ -15,7 +15,6 @@
 
 | Function | Inputs | Outputs | Brief Description |
 | -------- | ------ | ------- | ----------------- |
-| [](#) |  |  |  |
 | [uppperFirst](#uppperfirst) | string | string |  |
 
 
@@ -31,11 +30,6 @@
 
 ## Sub-Function Descriptions
 
-### 
-
-**[] = ()**
-
-DESCRIPTION: 
 ### uppperFirst
 
 **[string] = uppperFirst(string)**
@@ -44,4 +38,4 @@ DESCRIPTION:
 
 ***
 
-*Generated on 01-Mar-2021 22:06:09 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 01-Mar-2021 22:14:33 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

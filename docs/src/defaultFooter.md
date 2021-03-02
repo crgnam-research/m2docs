@@ -13,10 +13,7 @@
 
 ## Sub-Functions
 
-| Function | Inputs | Outputs | Brief Description |
-| -------- | ------ | ------- | ----------------- |
-| [](#) |  |  |  |
-
+*No Sub-Functions*
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)
 
@@ -30,12 +27,7 @@
 
 ## Sub-Function Descriptions
 
-### 
-
-**[] = ()**
-
-DESCRIPTION: 
-
+*No Sub-Functions*
 ***
 
-*Generated on 01-Mar-2021 22:06:09 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 01-Mar-2021 22:14:32 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

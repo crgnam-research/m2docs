@@ -109,6 +109,7 @@ classdef m2md < handle
                 self.CONSTRUCTOR = {};
                 self.METHODS = {};
                 self.METHOD_ATTR = {};
+                self.SUBFUNCTIONS = {};
                 
                 % Set the default values of supported Class Attributes:
                 self.CLASS_ATTR.Abstract.DEFAULT = 'false';
@@ -327,21 +328,23 @@ classdef m2md < handle
                     num_subf = 1;
                     for jj = 1:length(f1)
                         func_line = msource(f1(jj):f2(jj));
-                        if jj == length(f1)
-                            m_temp2 = msource(f1(jj):end);
-                        else
-                            m_temp2 = msource(f1(jj):f1(jj+1));
-                        end
-                        func = self.parseFunction(func_line,m_temp2);
-                        
-                        if strcmp(func.FUNCTION,self.FILENAME)
-                            self.FUNCTION = func;
-                            self.FUNCTION.NAME = self.NAME;
-                            self.FUNCTION.BRIEF = self.BRIEF;
-                            self.FUNCTION.DESCRIPTION = self.DESCRIPTION;
-                        else
-                            self.SUBFUNCTIONS{num_subf} = func;
-                            num_subf = num_subf+1;
+                        if ~isempty(func_line)
+                            if jj == length(f1)
+                                m_temp2 = msource(f1(jj):end);
+                            else
+                                m_temp2 = msource(f1(jj):f1(jj+1));
+                            end
+                            func = self.parseFunction(func_line,m_temp2);
+
+                            if strcmp(func.FUNCTION,self.FILENAME)
+                                self.FUNCTION = func;
+                                self.FUNCTION.NAME = self.NAME;
+                                self.FUNCTION.BRIEF = self.BRIEF;
+                                self.FUNCTION.DESCRIPTION = self.DESCRIPTION;
+                            else
+                                self.SUBFUNCTIONS{num_subf} = func;
+                                num_subf = num_subf+1;
+                            end
                         end
                     end
                     
