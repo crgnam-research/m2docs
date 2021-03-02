@@ -9,9 +9,9 @@ A Utility for Generating Markdown Documentation for MATLAB
 
 ## Features
 - Supported .m file types:
-  - Class
-  - Function
-  - Script
+  - Classes
+  - Functions (with all sub-functions)
+  - Scripts (with all sub-functions)
 - Customizable output via template files
 - Easy integration with github pages
 
@@ -19,9 +19,10 @@ A Utility for Generating Markdown Documentation for MATLAB
 
 ## How to Use:
 
-1. Add `m2md/src/` to your MATLAB path.  (e.g. `addpath(your/path/to/m2md/src/)`)
-2. Navigate to a directory above all of your .m files, and where your output docs directory will be/is
-3. Run as: `m2md({INPUT_DIRS},OUTPUT_DIR,OPTIONS)`
+1. Simply write a MATLAB file as you normally would, making comments abiding by the [Comment Style Guide](#comment-style-guide)
+4. Add `m2md/src/` to your MATLAB path.  (e.g. `addpath(your/path/to/m2md/src/)`)
+5. Navigate to a directory above all of your .m files, and where your output docs directory will be/is
+6. Run as: `m2md({INPUT_DIRS},OUTPUT_DIR,OPTIONS)`
 
 This will process all of the directories and .m files specified in `{INPUT_DIRS}`, and produce a set of markdown files in `OUTPUT_DIR` along with a set of index files for navigating them.
 
@@ -56,6 +57,35 @@ table {
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
 ```
+
+***
+## Comment Style Guide
+In order to get the most out of your documentation, there are several things you need to keep in mind while commenting.  All of these comments are totally optional, but without them the only things that will be documented are the file's meta data (file name, type, etc.) along with:
+
+- class properties and their attributes
+- class methods, their attributes, their inputs and their outputs
+- function inputs and outputs
+- sub-function inputs and outputs
+
+To add descriptions/information for your properties/methods/functions/scripts, etc. You'll need to format your comments properly.  But don't worry!  Its easy!
+
+- To assign a **Name** to your file make a comment starting with `NAME>{Your Name Here}` at the top of the file (somewhere before any function/classdef declaration)
+- To assign a **Brief Description** to your file, make a comment `BRIEF>{Your Brief Description Here}` at the top of the file (somewhere before any function/classdef declaration)
+- To assign a **Detailed Description** to your file, make a comment `DESCRIPTION>{Your Detailed Description Here}` at the top of the file (somewhere any function/classdef/declaration)
+
+All of three of these special comments outlined above can span multiple lines.  Simply make sure to keep the keyword and bracket together (e.g. `NAME>{` cannot be broken between lines).  Whatever text placed inside the the brackets will be assigned to that particular parameter.
+
+Beyond assigning a name and description to your file, you can also add additional information about certain components of your file These are outlined below.
+
+### Classes
+- For each class method, you can use `NAME>{}`, `BRIEF>{}`, and `DESCRIPTION>{}`. Simply place them immediately following the function delcaration
+- You can add brief descriptions to each property, simply write a normal comment on the same line as the property you wish to describe
+
+### Functions
+- You can use `NAME>{}`, `BRIEF>{}`, and `DESCRIPTION>{}`.  Simply place them immediately following the function delcaration
+
+### Sub-Functions
+- You can use `NAME>{}`, `BRIEF>{}`, and `DESCRIPTION>{}`.  Simply place them immediately following the sub-function delcaration
 
 ***
 ## Contact
