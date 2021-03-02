@@ -7,6 +7,7 @@
 %}
 function [] = defaultIndexTemplate(rel_path,name)
     % Get a list of everything in the directoy we care about:
+    rel_path = strrep(rel_path,'\','/');
     subdirs = dir([rel_path,'/*']);
     subdirs = subdirs([subdirs.isdir]);
     subdirs = subdirs(~ismember({subdirs.name},{'.','..'}));
