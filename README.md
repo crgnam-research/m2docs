@@ -5,7 +5,7 @@
 [![Issues](https://img.shields.io/github/issues/crgnam-research/m2md)](https://github.com/crgnam-research/m2md/issues)
 [![View m2md on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/88046-m2md)
 
-A Utility for Generating Markdown based Documentation for MATLAB
+A Utility for Generating Markdown Documentation for MATLAB
 
 ## How to Use:
 
