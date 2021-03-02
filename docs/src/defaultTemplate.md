@@ -3,7 +3,7 @@
 
 # function: defaultTemplate
 
-**Default Template**: Template for use with m2md
+**Default Template**: Defines how each markdown document is to be formatted
 
 **Inputs:**: m2mdData
 
@@ -16,14 +16,14 @@
 | Function | Inputs | Outputs | Brief Description |
 | -------- | ------ | ------- | ----------------- |
 | [](#) |  |  |  |
-| [createCAtable](#createcatable) | CLASS_ATTR | CLASS_ATTR_FORMAT |  |
-| [createPtable](#createptable) | PROPERTIES | PROPERTIES_FORMAT |  |
-| [createCtable](#createctable) | CONSTRUCTOR | CONSTRUCTOR_FORMAT |  |
-| [createMtable](#createmtable) | METHODS | METHODS_FORMAT |  |
-| [createCdescr](#createcdescr) | CONSTRUCTOR | CONSTRUCTOR_DESCR |  |
-| [createMdescr](#createmdescr) | METHODS | METHODS_DESCR |  |
-| [createSFtable](#createsftable) | SUBFUNCTIONS | SUBF_FORMAT |  |
-| [createSFdescr](#createsfdescr) | SUBFUNCTIONS | SUBF_DESCR |  |
+| [createCAtable](#createcatable) | CLASS_ATTR | CLASS_ATTR_FORMAT | Creates a table of the class attributes |
+| [createPtable](#createptable) | PROPERTIES | PROPERTIES_FORMAT | Creates a table of the class properties |
+| [createCtable](#createctable) | CONSTRUCTOR | CONSTRUCTOR_FORMAT | Creates a table of the class constructor |
+| [createMtable](#createmtable) | METHODS | METHODS_FORMAT | Creates a table of the class methods |
+| [createCdescr](#createcdescr) | CONSTRUCTOR | CONSTRUCTOR_DESCR | Formats the constructor description |
+| [createMdescr](#createmdescr) | METHODS | METHODS_DESCR | Formats each method's description |
+| [createSFtable](#createsftable) | SUBFUNCTIONS | SUBF_FORMAT | Creates a table of each sub-function |
+| [createSFdescr](#createsfdescr) | SUBFUNCTIONS | SUBF_DESCR | Formats each sub-function description |
 
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)
@@ -32,8 +32,6 @@
 
 ## Detailed Description
 
-
- A more detailed description can go here two.
 
 
  ***
@@ -88,4 +86,4 @@ DESCRIPTION:
 
 ***
 
-*Generated on 01-Mar-2021 16:59:50 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 01-Mar-2021 22:06:09 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

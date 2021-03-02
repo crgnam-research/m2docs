@@ -1,10 +1,6 @@
-% NAME>{Default Template}
+% NAME>{Default Index Template}
 %
-% BRIEF>{Template for use with m2md}
-%
-% DESCRIPTION>{
-% A more detailed description can go here two.
-%}
+% BRIEF>{Defines how each index file is to be formatted}
 function [] = defaultIndexTemplate(rel_path,name)
     % Get a list of everything in the directoy we care about:
     rel_path = strrep(rel_path,'\','/');

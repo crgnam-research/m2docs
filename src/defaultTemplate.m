@@ -1,12 +1,6 @@
 % NAME>{Default Template}
-%
-% BRIEF>{Template for use with m2md}
-%
-% DESCRIPTION>{
-% A more detailed description can go here two.
-%}
+% BRIEF>{Defines how each markdown document is to be formatted}
 function [] = defaultTemplate(m2mdData)
-
     switch m2mdData.TYPE
         case 'CLASS'
             % Format each of the major sections:
@@ -132,6 +126,8 @@ end
 
 %% Subformating Functions
 function [CLASS_ATTR_FORMAT] = createCAtable(CLASS_ATTR)
+    % NAME>{Create CA Table}
+    % BRIEF>{Creates a table of the class attributes}
     % Check if any set values were non-default:
     fn = fieldnames(CLASS_ATTR);
     CLASS_ATTR_DIFF = struct;
@@ -162,6 +158,8 @@ function [CLASS_ATTR_FORMAT] = createCAtable(CLASS_ATTR)
 end
 
 function [PROPERTIES_FORMAT] = createPtable(PROPERTIES)
+    % NAME>{Create P Table}
+    % BRIEF>{Creates a table of the class properties}
     if isempty(PROPERTIES)
         PROPERTIES_FORMAT = '*No Properties*';
     else       
@@ -203,6 +201,8 @@ function [PROPERTIES_FORMAT] = createPtable(PROPERTIES)
 end
 
 function [CONSTRUCTOR_FORMAT] = createCtable(CONSTRUCTOR)
+    % NAME>{Create C Table}
+    % BRIEF>{Creates a table of the class constructor}
     if isempty(CONSTRUCTOR)
         CONSTRUCTOR_FORMAT = '*No Constructor*';
     else
@@ -239,6 +239,8 @@ function [CONSTRUCTOR_FORMAT] = createCtable(CONSTRUCTOR)
 end
 
 function [METHODS_FORMAT] = createMtable(METHODS)
+    % NAME>{Create M Table}
+    % BRIEF>{Creates a table of the class methods}
     if isempty(METHODS)
         METHODS_FORMAT = '*No Methods*';
     else
@@ -280,6 +282,8 @@ function [METHODS_FORMAT] = createMtable(METHODS)
 end
 
 function [CONSTRUCTOR_DESCR] = createCdescr(CONSTRUCTOR)
+    % NAME>{Create C Description}
+    % BRIEF>{Formats the constructor description}
     if isempty(CONSTRUCTOR)
         CONSTRUCTOR_DESCR = '*No Methods*';
     else
@@ -297,6 +301,8 @@ function [CONSTRUCTOR_DESCR] = createCdescr(CONSTRUCTOR)
 end
 
 function [METHODS_DESCR] = createMdescr(METHODS)
+    % NAME>{Create M Description}
+    % BRIEF>{Formats each method's description}
     if isempty(METHODS)
         METHODS_DESCR = '*No Methods*';
     else
@@ -316,6 +322,8 @@ function [METHODS_DESCR] = createMdescr(METHODS)
 end
 
 function [SUBF_FORMAT] = createSFtable(SUBFUNCTIONS)
+    % NAME>{Create SF Table}
+    % BRIEF>{Creates a table of each sub-function}
     if isempty(SUBFUNCTIONS)
         SUBF_FORMAT = '*No Sub-Functions*';
     else
@@ -336,6 +344,8 @@ function [SUBF_FORMAT] = createSFtable(SUBFUNCTIONS)
 end
 
 function [SUBF_DESCR] = createSFdescr(SUBFUNCTIONS)
+    % NAME>{Create SF Description}
+    % BRIEF>{Formats each sub-function description}
     if isempty(SUBFUNCTIONS)
         SUBF_DESCR = '*No Sub-Functions*';
     else

@@ -3,7 +3,7 @@
 
 # function: defaultIndexTemplate
 
-**Default Template**: Template for use with m2md
+**Default Index Template**: Defines how each index file is to be formatted
 
 **Inputs:**: rel_path, name
 
@@ -16,6 +16,7 @@
 | Function | Inputs | Outputs | Brief Description |
 | -------- | ------ | ------- | ----------------- |
 | [](#) |  |  |  |
+| [uppperFirst](#uppperfirst) | string | string |  |
 
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)
@@ -24,8 +25,6 @@
 
 ## Detailed Description
 
-
- A more detailed description can go here two.
 
 
  ***
@@ -37,7 +36,12 @@
 **[] = ()**
 
 DESCRIPTION: 
+### uppperFirst
+
+**[string] = uppperFirst(string)**
+
+DESCRIPTION: 
 
 ***
 
-*Generated on 01-Mar-2021 16:59:50 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 01-Mar-2021 22:06:09 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

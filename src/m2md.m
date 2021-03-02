@@ -1,52 +1,59 @@
 % NAME>{Matlab 2 Markdown}
 %
-% BRIEF>{Utility for creating markdown documentation from a Matlab M-file}
+% BRIEF>{Utility for Creating Markdown Documentation for MATLAB Projects}
 %
 % DESCRIPTION>{
-% A more detailed description can go here. 
+% This class will automatically generate documentation in a markdown
+% format, ready to be uploaded to GitHub pages or any other static site
+% generator system that allows for markdown files.
+% 
+% Simply provide the m files, or a directory/directories to your m files,
+% along with the desired output directory.
 %}
 classdef m2md < handle
     properties (Access = public)
         % Inputs (set by user):
-        InputMfiles_rel
-        InputMfiles_full
-        OutputMDdir_rel
-        OutputMDdir_full
-        OutputMD_name
-        Template
+        InputMfiles_rel % Input m files relative path
+        InputMfiles_full % Input m files absolute path
+        OutputMDdir_rel % Output directory relative path
+        OutputMDdir_full % Output directory full path
+        OutputMD_name % Output names
+        Template % Function handle of markdown template
         
         % Index Generation:
-        MakeIndex
-        IndexTemplate
+        MakeIndex % Boolean for whether or not to make the index files
+        IndexTemplate % Function handle to the markdown template
         
         % Generic Data:
-        TYPE % Type of m-file that was loaded
-        FILENAME %
-        BCOMMENTS_INDS % Indices of block comment sections
-        leading_comments
-        NAME
-        BRIEF
-        DESCRIPTION
+        TYPE % Current type of m file that was loaded
+        FILENAME % Current file name
+        BCOMMENTS_INDS % Current indices of block comment sections
+        leading_comments % Current leading comments
+        NAME % Current specified name
+        BRIEF % Current specified brief description
+        DESCRIPTION % Current specified detailed description
         
         % TYPE==FUNCTION: Data extracted from the m file:
-        FUNCTION
-        SUBFUNCTIONS
+        FUNCTION % Current function data
+        SUBFUNCTIONS % Current sub-functions data
         
         % TYPE==CLASS: Data extracted from the m file:
-        CLASS_ATTR
-        SUPERCLASS
-        PROPERTIES
-        PROP_ATTR
-        CONSTRUCTOR
-        METHODS
-        METHOD_ATTR
+        CLASS_ATTR % Current class attributes
+        SUPERCLASS % Current class' super class
+        PROPERTIES % Current class properties
+        PROP_ATTR % Current class' property attributes
+        CONSTRUCTOR % Current class' constructor
+        METHODS % Current class' methods
+        METHOD_ATTR % Current class' method attributes
     end
     
     methods (Access = public)
         function [self] = m2md(InputMfiles,OutputMDdir,varargin)
+            tic
             % NAME>{Matlab to Markdown}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
+            % BRIEF>{The constructor for the m2md class}
+            % DESCRIPTION>{When called this will instantiate an object and
+            % then begin processing all of the input m files into markdown}
             
             % Define defaults:
             validInputPath = @(x) ischar(x) || iscell(x);
@@ -373,14 +380,15 @@ classdef m2md < handle
                     self.IndexTemplate(rel_path(2:end),subdirs(ii).name)
                 end
             end
+            x = toc;
+            fprintf('Documented %i files in %f seconds\n',length(self.InputMfiles_rel),x)
         end
     end
     
     methods (Access = private)
         function [] = getCLASS_ATTR(self,cdef_line)
             % NAME>{Get Class Attributes}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
+            % BRIEF>{Reads the current class attributes}
             fn = fieldnames(self.CLASS_ATTR);
             for jj = 1:length(fn)
                 self.CLASS_ATTR.(fn{jj}).SET = self.CLASS_ATTR.(fn{jj}).DEFAULT;
@@ -409,8 +417,7 @@ classdef m2md < handle
         
         function [custom] = getPROP_ATTR(self,prop_line)
             % NAME>{Get Property Attributes}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
+            % BRIEF>{Reads the current class' property attributes}
             custom = false;
             fn = fieldnames(self.PROP_ATTR);
             for jj = 1:length(fn)
@@ -440,8 +447,7 @@ classdef m2md < handle
         
         function [] = getMETHOD_ATTR(self,method_line)
             % NAME>{Get Method Attributes}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
+            % BRIEF>{Gets the current class' method attributes}
             fn = fieldnames(self.METHOD_ATTR);
             for jj = 1:length(fn)
                 self.METHOD_ATTR.(fn{jj}).SET = self.METHOD_ATTR.(fn{jj}).DEFAULT;
@@ -469,8 +475,7 @@ classdef m2md < handle
     
         function [i1,i2] = removeComments(self,i1,i2)
             % NAME>{Remove Comments}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
+            % BRIEF>{Removes matches that are comments}
             if ~isempty(self.BCOMMENTS_INDS)
                 remove = false(size(i1));
                 for ii = 1:length(i1)
@@ -485,8 +490,7 @@ classdef m2md < handle
     methods (Access = private, Static = true)        
         function [outstruct] = parseFunction(func_line,msource)   
             % NAME>{Parse Function}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
+            % BRIEF>{Gets the inputs/outputs of the current function}
             % Remove comments (if any on line):
             idx = strfind(func_line,'%');
             func_line(idx:end)=[];
@@ -522,7 +526,6 @@ classdef m2md < handle
                     end
                 end
                 % Cleanup:
-%                 func_line = eraseBetween(func_line,'...',newline);
                 id_elip = strfind(func_line,'...');
                 id_nl   = strfind(func_line,newline);
                 remove = [];
@@ -596,8 +599,7 @@ classdef m2md < handle
         
         function [mfiles_rel,mfiles_full] = getMfiles(InputMfiles)
             % NAME>{getMfiles}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
+            % BRIEF>{Gets the relative and absolute paths to all specified m files}
             if iscell(InputMfiles)
                 assert(numel(InputMfiles) == size(InputMfiles,1)*size(InputMfiles,2),...
                        'Batch input must be with a 1xN or Nx1 cell array');
@@ -631,8 +633,7 @@ classdef m2md < handle
         
         function [string] = bool2str(bool)
             % NAME>{bool2str}
-            % BRIEF>{Brief Description Goes Here}
-            % DESCRIPTION>{Detailed Description Goes Here}
+            % BRIEF>{Converts a boolean to a string}
             if bool
                 string = 'True';
             else
