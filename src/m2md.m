@@ -28,10 +28,12 @@ classdef m2md < handle
         TYPE % Current type of m file that was loaded
         FILENAME % Current file name
         BCOMMENTS_INDS % Current indices of block comment sections
+        MSOURCE % Source code in m file
         leading_comments % Current leading comments
         NAME % Current specified name
         BRIEF % Current specified brief description
         DESCRIPTION % Current specified detailed description
+        INCLUDE_CODE % Boolean for whether or not to include the source code
         
         % TYPE==FUNCTION: Data extracted from the m file:
         FUNCTION % Current function data
@@ -110,6 +112,7 @@ classdef m2md < handle
                 self.METHODS = {};
                 self.METHOD_ATTR = {};
                 self.SUBFUNCTIONS = {};
+                self.INCLUDE_CODE = false;
                 
                 % Set the default values of supported Class Attributes:
                 self.CLASS_ATTR.Abstract.DEFAULT = 'false';
@@ -136,8 +139,17 @@ classdef m2md < handle
                 
                 % Identify all block comments:
                 msource = fileread(self.InputMfiles_full{ii});
+                self.MSOURCE = msource;
                 [i1,i2] = regexp(msource,block_comments_exp,'matchcase');
                 self.BCOMMENTS_INDS = [i1',i2'];
+                
+                % Check if flag to include code has been issued:
+                val = extractBetween(msource,'INCLUDECODE>{','}');
+                if ~isempty(val)
+                    if strcmpi(val{1},'true')
+                        self.INCLUDE_CODE = true;
+                    end
+                end
                 
                 % Determine the type and get def line:
                 [i1,i2] = regexp(msource,cdef_exp('classdef',self.FILENAME),'matchcase');

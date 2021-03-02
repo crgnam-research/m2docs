@@ -32,10 +32,12 @@ default
 | TYPE | default | Current type of m file that was loaded |
 | FILENAME | default | Current file name |
 | BCOMMENTS_INDS | default | Current indices of block comment sections |
+| MSOURCE | default | Source code in m file |
 | leading_comments | default | Current leading comments |
 | NAME | default | Current specified name |
 | BRIEF | default | Current specified brief description |
 | DESCRIPTION | default | Current specified detailed description |
+| INCLUDE_CODE | default | Boolean for whether or not to include the source code |
 | FUNCTION | default | Current function data |
 | SUBFUNCTIONS | default | Current sub-functions data |
 | CLASS_ATTR | default | Current class attributes |

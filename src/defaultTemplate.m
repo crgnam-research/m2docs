@@ -1,8 +1,15 @@
 % NAME>{Default Template}
 % BRIEF>{Defines how each markdown document is to be formatted}
 function [] = defaultTemplate(m2mdData)
+           
+    % Deal with each class:
     switch m2mdData.TYPE
         case 'CLASS'
+            if m2mdData.INCLUDE_CODE
+                msource = m2mdData.MSOURCE;
+                code = sprintf('```matlab \n %s \n ```',msource);
+            end
+            
             % Format each of the major sections:
             CLASS_ATTR   = createCAtable(m2mdData.CLASS_ATTR);
             PROPERTIES   = createPtable(m2mdData.PROPERTIES);
@@ -46,6 +53,7 @@ function [] = defaultTemplate(m2mdData)
                                 CONSTRUCTOR_DESCR,...
                                 METHOD_DESCR);
         case 'FUNCTION'
+            
             % Format each of the major sections:
             inputs = sprintf([repmat('%s, ',1,length(m2mdData.FUNCTION.INPUTS)-1),'%s'],m2mdData.FUNCTION.INPUTS{:});
             outputs = sprintf([repmat('%s, ',1,length(m2mdData.FUNCTION.OUTPUTS)-1),'%s'],m2mdData.FUNCTION.OUTPUTS{:});
@@ -110,6 +118,15 @@ function [] = defaultTemplate(m2mdData)
     rel_path = fileparts(rel_path);
     header = defaultHeader(rel_path);
     footer = defaultFooter();
+    
+    % Get the code if asked for:
+    if m2mdData.INCLUDE_CODE
+        msource = m2mdData.MSOURCE;
+        code = sprintf('```matlab \n %s \n ```',msource);
+        markdown = sprintf('%s \n *** \n\n # Source Code:\n\n %s \n ',markdown,code);
+    end
+    
+    % Format the final output markdown:
     markdown = sprintf([header,'\n',markdown,'\n',footer]);
     
     % Save the markdown file:
