@@ -5,7 +5,10 @@
 [![Issues](https://img.shields.io/github/issues/crgnam-research/m2md)](https://github.com/crgnam-research/m2md/issues)
 [![View m2md on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/88046-m2md)
 
-A Utility for Generating Markdown Documentation for MATLAB
+**A Utility for Generating Markdown Documentation for MATLAB**
+
+## Overview
+This project was started as a way to maintain documentation for the [Spacecraft-Navigation-Toolbox (SNT)](sntoolbox.com).  
 
 ## Features
 - Supported .m file types:
@@ -17,16 +20,14 @@ A Utility for Generating Markdown Documentation for MATLAB
 
 ***
 
-## How to Use:
+# How to Use:
 
 1. Simply write a MATLAB file as you normally would, making comments abiding by the [Comment Style Guide](#comment-style-guide)
 4. Add `m2md/src/` to your MATLAB path.  (e.g. `addpath(your/path/to/m2md/src/)`)
 5. Navigate to a directory above all of your .m files, and where your output docs directory will be/is
 6. Run as: `m2md({INPUT_DIRS},OUTPUT_DIR,OPTIONS)`
 
-This will process all of the directories and .m files specified in `{INPUT_DIRS}`, and produce a set of markdown files in `OUTPUT_DIR` along with a set of index files for navigating them.
-
-For an example, refer to `generateDocs.m` in the root directory of this project.  This is the script which auto generates the documentation for this project.
+This will process all of the directories and .m files specified in `{INPUT_DIRS}`, and produce a set of markdown files in `OUTPUT_DIR` along with a set of index files for navigating them.  The script `generateDocs.m` in the root directory of this project is what is used to generate the documentation for this project so you can refer to it as an example.
 
 ### Hosting on GitHub Pages:
 Simply turn on [GitHub Pages](https://guides.github.com/features/pages/), select a theme, create an `index.md` file, and create a link to whatever the base markdown file thats been generated is named (typically `docs.md`).  Thats it!  Your MATLAB documentation will be hosted in an easy to navigate website!
@@ -88,7 +89,7 @@ Beyond assigning a name and description to your file, you can also add additiona
 - You can use `NAME>{}`, `BRIEF>{}`, and `DESCRIPTION>{}`.  Simply place them immediately following the sub-function delcaration
 
 ***
-## Contact
+# Contact
 If you come across any issues or bugs with this tool, please [submit a new issue](https://github.com/crgnam-research/m2md/issues)
 
 For questions or suggestions on this tool (or anything else!) please feel free to reach out to my email: [crgnam@buffalo.edu](mailto:crgnam@buffalo.edu)
