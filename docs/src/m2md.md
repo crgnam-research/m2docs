@@ -1,7 +1,7 @@
 [Home](../index.md) > [docs](../docs_index.md) > [src](src_index.md)  
 
-
-# classdef: m2md
+ 
+ # classdef: m2md
 
 **SuperClass:** handle
 
@@ -98,4 +98,50 @@ default
 **[self] = m2md(InputMfiles, OutputMDdir, varargin)**
 
 DESCRIPTION: When called this will instantiate an object and
-            
+            % then begin processing all of the input m files into markdown
+
+ ***
+
+## Method Descriptions
+
+### getCLASS_ATTR
+
+**[] = getCLASS_ATTR(self, cdef_line)**
+
+DESCRIPTION: 
+### getPROP_ATTR
+
+**[custom] = getPROP_ATTR(self, prop_line)**
+
+DESCRIPTION: 
+### getMETHOD_ATTR
+
+**[] = getMETHOD_ATTR(self, method_line)**
+
+DESCRIPTION: 
+### removeComments
+
+**[i1, i2] = removeComments(self, i1, i2)**
+
+DESCRIPTION: 
+### parseFunction
+
+**[outstruct] = parseFunction(func_line, msource)**
+
+DESCRIPTION: ','
+### getMfiles
+
+**[mfiles_rel, mfiles_full] = getMfiles(InputMfiles)**
+
+DESCRIPTION: 
+### bool2str
+
+**[string] = bool2str(bool)**
+
+DESCRIPTION: 
+
+
+ 
+ ***
+
+*Generated on 02-Mar-2021 00:56:34 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

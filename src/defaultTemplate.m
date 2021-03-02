@@ -127,7 +127,7 @@ function [] = defaultTemplate(m2mdData)
     end
     
     % Format the final output markdown:
-    markdown = sprintf([header,'\n',markdown,'\n',footer]);
+    markdown = sprintf('%s \n %s \n %s',header,markdown,footer);
     
     % Save the markdown file:
     full_path = fullfile(m2mdData.OutputMDdir_full,m2mdData.OutputMD_name);

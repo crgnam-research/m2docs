@@ -1,7 +1,7 @@
 [Home](../index.md) > [docs](../docs_index.md) > [src](src_index.md)  
 
-
-# function: defaultTemplate
+ 
+ # function: defaultTemplate
 
 **Default Template**: Defines how each markdown document is to be formatted
 
@@ -79,7 +79,7 @@ DESCRIPTION:
 DESCRIPTION: 
 
 
+ 
+ ***
 
-***
-
-*Generated on 02-Mar-2021 00:28:18 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 02-Mar-2021 00:56:34 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

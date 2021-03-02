@@ -1,7 +1,7 @@
 [Home](../index.md) > [docs](../docs_index.md) > [src](src_index.md)  
 
-
-# function: defaultIndexTemplate
+ 
+ # function: defaultIndexTemplate
 
 **Default Index Template**: Defines how each index file is to be formatted
 
@@ -37,7 +37,7 @@
 DESCRIPTION: 
 
 
+ 
+ ***
 
-***
-
-*Generated on 02-Mar-2021 00:28:18 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 02-Mar-2021 00:56:34 by [m2md](https://github.com/crgnam-research/m2md) © 2021*

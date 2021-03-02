@@ -322,21 +322,21 @@ classdef m2md < handle
                         end
                     end
                     
-                elseif strcmp(self.TYPE,'FUNCTION')
+                elseif strcmp(self.TYPE,'FUNCTION')  
                     [f1,f2] = regexp(msource,def_exp('function'),'matchcase');
-                    func_line = extractBetween(msource,'function',newline);
-                    func_line = ['function',func_line{1},newline];
-                    f12 = strfind(msource,func_line);
-                    f22 = length(func_line);
-                    if isempty(f1)
-                       f1 = f12;
-                       f2 = f22;
-                    else
-                        if ~ismember(f12,f1)
-                            f1 = [f12,f1];
-                            f2 = [f22,f2];
-                        end
-                    end
+%                     func_line = extractBetween(msource,'function',newline);
+%                     func_line = ['function',func_line{1},newline];
+%                     f12 = strfind(msource,func_line);
+%                     f22 = f12+length(func_line);
+%                     if isempty(f1)
+%                        f1 = f12;
+%                        f2 = f22;
+%                     else
+%                         if ~ismember(f12,f1)
+%                             f1 = [f12,f1];
+%                             f2 = [f22,f2];
+%                         end
+%                     end
                     num_subf = 1;
                     for jj = 1:length(f1)
                         func_line = msource(f1(jj):f2(jj));
@@ -346,6 +346,7 @@ classdef m2md < handle
                             else
                                 m_temp2 = msource(f1(jj):f1(jj+1));
                             end
+                            
                             func = self.parseFunction(func_line,m_temp2);
 
                             if strcmp(func.FUNCTION,self.FILENAME)
@@ -506,6 +507,7 @@ classdef m2md < handle
         function [outstruct] = parseFunction(func_line,msource)   
             % NAME>{Parse Function}
             % BRIEF>{Gets the inputs/outputs of the current function}
+            
             % Remove comments (if any on line):
             idx = strfind(func_line,'%');
             func_line(idx:end)=[];
