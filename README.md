@@ -28,7 +28,7 @@ This will process all of the directories and .m files specified in `{INPUT_DIRS}
 For an example, refer to `generateDocs.m` in the root directory of this project.  This is the script which auto generates the documentation for this project.
 
 ### Hosting on GitHub Pages:
-Simply [turn on giithub pages](https://guides.github.com/features/pages/), select a theme, create an `index.md` file, and create a link to whatever the base markdown file thats been generated is named (typically `docs.md`).  Thats it!  Your MATLAB documentation will be hosted in an easy to navigate website!
+Simply turn on [GitHub Pages](https://guides.github.com/features/pages/), select a theme, create an `index.md` file, and create a link to whatever the base markdown file thats been generated is named (typically `docs.md`).  Thats it!  Your MATLAB documentation will be hosted in an easy to navigate website!
 
 ### Tips when hosting on GitHub Pages:
 
