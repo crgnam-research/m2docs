@@ -75,7 +75,7 @@ To add descriptions/information for your properties/methods/functions/scripts, e
 
 All of three of these special comments outlined above can span multiple lines.  Simply make sure to keep the keyword and bracket together (e.g. `NAME>{` cannot be broken between lines).  Whatever text placed inside the the brackets will be assigned to that particular parameter.
 
-Beyond assigning a name and description to your file, you can also add additional information about certain components of your file These are outlined below.
+Beyond assigning a name and description to your file, you can also add additional information about certain components of your file.  These are outlined below:
 
 ### Classes
 - For each class method, you can use `NAME>{}`, `BRIEF>{}`, and `DESCRIPTION>{}`. Simply place them immediately following the function delcaration
