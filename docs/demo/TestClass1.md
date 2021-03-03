@@ -1,4 +1,4 @@
-[Home](../../index.md) > [](../../_index.md) > [docs](../docs_index.md) > [demo](demo_index.md)  
+[Home](../index.md) > [docs](../docs_index.md) > [demo](demo_index.md)  
 
 
 # classdef: TestClass1
@@ -67,30 +67,34 @@ Class detailed description goes here
 
 ## Method Descriptions
 
-### TestClass1
+ ### TestClass1
 
-**[self] = TestClass1(inputArg1, inputArg2)**
-
-DESCRIPTION: Detailed description goes here.  And we can even use
+```matlab
+function [self] = TestClass1(inputArg1, inputArg2)
+```
+Detailed description goes here.  And we can even use
 markdown syntax!  I'm not going to do that though, because this
 is just a test...
-### method1
+ ### method1
 
-**[] = method1(self, inputArg)**
+```matlab
+function [] = method1(self, inputArg)
+```
 
-DESCRIPTION: 
-### method4
+ ### method4
 
-**[val] = method4(inputArg, varargin)**
-
-DESCRIPTION: Detailed description goes here.  And we can even use
+```matlab
+function [val] = method4(inputArg, varargin)
+```
+Detailed description goes here.  And we can even use
 markdown syntax!  I'm not going to do that though, because this
 is just a test... 4
-### method3
+ ### method3
 
-**[val] = method3(inputArg)**
+```matlab
+function [val] = method3(inputArg)
+```
 
-DESCRIPTION: 
 
 
  
@@ -165,4 +169,4 @@ end
  
 ***
 
-*Generated on 02-Mar-2021 23:57:17 by [m2md](https://github.com/crgnam-research/m2md) © 2021*
+*Generated on 03-Mar-2021 00:05:55 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
