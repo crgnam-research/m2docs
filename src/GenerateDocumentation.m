@@ -4,11 +4,13 @@ classdef GenerateDocumentation < handle
         in_abs  cell % Nx1 absolute paths to all N input files
         out_rel cell % Nx1 relative paths to all N output files
         out_abs cell % Nx1 absolute paths to all N output files
+        out_dir char
         root    char % The root directory this was run from
         
         class_template function_handle % The template used to format outputs for class files
         function_template function_handle % The template used to format outputs for function files
         script_template function_handle % The template used to format outputs for script files
+        index_template function_handle
         
         ind (1,1) double % Current itertaion for looping through all files
         
@@ -34,13 +36,16 @@ classdef GenerateDocumentation < handle
                 addParameter(p,'ClassTemplate',@defaultClassTemplate,validTemplate);
                 addParameter(p,'FunctionTemplate',@defaultFunctionTemplate,validTemplate);
                 addParameter(p,'ScriptTemplate',@defaultScriptTemplate,validTemplate);
+                addParameter(p,'IndexTemplate',@defaultIndexTemplate,validTemplate);
             parse(p,input_files,varargin{:});
             
             % Get paths:
             self.class_template = p.Results.ClassTemplate;
             self.function_template = p.Results.FunctionTemplate;
             self.script_template = p.Results.ScriptTemplate;
+            self.index_template = p.Results.IndexTemplate;
             self.root = pwd;
+            self.out_dir = p.Results.output_dir;
             self.getPaths(p.Results.input_files, p.Results.output_dir)
             
             % Pre-allocate:
@@ -49,6 +54,7 @@ classdef GenerateDocumentation < handle
             self.data = cell(size(self.in_rel));
             
             % Parse each file:
+            disp('Reading all input files...')
             for ii = 1:length(self.in_abs)
                 self.ind = ii;
                 msource = fileread(self.in_abs{ii});
@@ -75,6 +81,7 @@ classdef GenerateDocumentation < handle
             % This is kept separate for future versions where
             % cross-references may be computed first, once all of the data
             % for all files has been read in
+            disp('Writing all output files...')
             for ii = 1:length(self.data)
                 % Send data to the proper template file:
                 switch self.type{ii}
@@ -87,8 +94,20 @@ classdef GenerateDocumentation < handle
                 end
             end
             
-            % Create the index files:
-            
+            disp('Writing index files...')
+            % Get list of all directories:
+            subdirs = dir([self.out_dir,'/**/*']);
+            subdirs = subdirs([subdirs.isdir]);
+            subdirs = subdirs(~ismember({subdirs.name},{'.','..'}));
+
+            % Make the document home index file:
+            self.index_template(self.out_dir(1:end-1),self.out_dir(1:end-1))
+
+            % Make all the sub-index files:
+            for ii = 1:length(subdirs)
+                rel_path = [erase(subdirs(ii).folder,pwd),'/',subdirs(ii).name];
+                self.index_template(rel_path(2:end),subdirs(ii).name)
+            end
             
             % Print the details:
             x = toc;

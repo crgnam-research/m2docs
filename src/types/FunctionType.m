@@ -167,10 +167,12 @@ classdef FunctionType
                     else
                         break
                     end
-                    if strcmp(tline(1:2),'%{') && ~in_block_comment
-                        in_block_comment = true;
-                    elseif in_block_comment && strcmp(tline(1:2),'%}')
-                        in_block_comment = false;
+                    if length(tline)>=2
+                        if strcmp(tline(1:2),'%{') && ~in_block_comment
+                            in_block_comment = true;
+                        elseif in_block_comment && strcmp(tline(1:2),'%}')
+                            in_block_comment = false;
+                        end
                     end
                 end
                 tline = fgetl(fid);

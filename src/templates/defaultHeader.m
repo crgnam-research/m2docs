@@ -1,5 +1,8 @@
 function [header] = defaultHeader(path)
-    path = strrep(path(2:end),'\','/');
+    path = strrep(path,'\','/');
+    if strcmp(path(1),'/')
+        path = path(2:end);
+    end
     path_split = strsplit(path,'/');
     path = '';
     L = length(path_split);

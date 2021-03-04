@@ -145,6 +145,8 @@ classdef ClassType < handle
             in_block_comment = false;
             classdef_comments = '';
             func_comments = '';
+            self.MethodList(1).BriefDescription = '';
+            self.MethodList(1).Description = '';
             prop_idx_matched = false(1,length(self.PropertyList));
             meth_idx_matched = false(1,length(self.MethodList));
             while ischar(tline)

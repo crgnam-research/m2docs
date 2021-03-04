@@ -107,7 +107,7 @@ end
 function [property_table] = createPropertyTable(PropertyList)
     % NAME>{Create P Table}
     % BRIEF>{Creates a table of the class properties}
-    if isempty(PropertyList)
+    if ~isfield(PropertyList(1).Attributes.AbortSet,'set')
         property_table = '*No Properties*';
     else       
         % Setup the table:
