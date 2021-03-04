@@ -1,4 +1,4 @@
-# m2md: MATLAB 2 Markdown
+# m2docs: MATLAB 2 Markdown
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/crgnam-research/m2md/blob/main/LICENSE)
 [![Release](https://img.shields.io/github/v/release/crgnam-research/m2md?include_prereleases)](https://github.com/crgnam-research/m2md/releases/tag/1.9)
