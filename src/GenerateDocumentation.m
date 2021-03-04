@@ -99,16 +99,16 @@ classdef GenerateDocumentation < handle
             subdirs = dir([self.out_dir,'/**/*']);
             subdirs = subdirs([subdirs.isdir]);
             subdirs = subdirs(~ismember({subdirs.name},{'.','..'}));
-            excluded_names = {'assets','_layouts'};
+            excluded_names = {'assets','_layouts','css'};
 
             % Make the document home index file:
-            self.index_template(self.out_dir(1:end-1),self.out_dir(1:end-1))
+            self.index_template(self.out_dir(1:end-1),self.out_dir(1:end-1),excluded_names)
 
             % Make all the sub-index files:
             for ii = 1:length(subdirs)
                 if ~any(strcmp(subdirs(ii).name,excluded_names))
                     rel_path = [erase(subdirs(ii).folder,pwd),'/',subdirs(ii).name];
-                    self.index_template(rel_path(2:end),subdirs(ii).name)
+                    self.index_template(rel_path(2:end),subdirs(ii).name,excluded_names)
                 end
             end
             

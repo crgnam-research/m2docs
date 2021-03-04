@@ -1,7 +1,7 @@
 % NAME>{Default Index Template}
 %
 % BRIEF>{Defines how each index file is to be formatted}
-function [] = defaultIndexTemplate(rel_path,name)
+function [] = defaultIndexTemplate(rel_path,name,excluded_names)
     % Get a list of everything in the directoy we care about:
     rel_path = strrep(rel_path,'\','/');
     subdirs = dir([rel_path,'/*']);
@@ -39,7 +39,9 @@ function [] = defaultIndexTemplate(rel_path,name)
         
         if ~isempty(subdirs)
             for ii = 1:length(subdirs)
-                body = sprintf([body,'- [%s/](%s)\n'],subdirs(ii).name,[subdirs(ii).name,'/',subdirs(ii).name,'_index.md']);
+                if ~any(strcmp(subdirs(ii).name,excluded_names))
+                    body = sprintf([body,'- [%s/](%s)\n'],subdirs(ii).name,[subdirs(ii).name,'/',subdirs(ii).name,'_index.md']);
+                end
             end
         end
     end
