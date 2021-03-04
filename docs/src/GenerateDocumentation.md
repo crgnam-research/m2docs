@@ -11,8 +11,10 @@
 
 ## Class Attributes
 
-| Attribute         | Status   | 
-| ----------------- | -------- | 
+<div class="table-wrapper" markdown="block">
+
+| Attribute         | Status   |
+| ----------------- | -------- |
 | Abstract | false | 
 | ConstructOnLoad | false | 
 | HandleCompatible | true | 
@@ -20,11 +22,16 @@
 | Sealed | false | 
 
 
+</div>
+
+
 [*Default Class Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/class-attributes.html)
 
  ***
 
 ## Properties
+
+<div class="table-wrapper" markdown="block">
 
 | Property | Attributes  | Type | Default Value | Description |
 | -------- | ----------- | ---- | ------------- | ----------- |
@@ -45,17 +52,25 @@
 | scriptBriefDescription |   | cell |  |  |
 | scriptDescription |   | cell |  |  |
 
+
+</div>
+
 [*Default Property Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html)
 
  ***
 
 ## Methods
 
+<div class="table-wrapper" markdown="block">
+
 | Method | Attributes | Inputs | Outputs | Brief Description |
 | ------ | ---------- | ------ | ------- | ----------------- |
 | [GenerateDocumentation](#generatedocumentation) |   | input_files, varargin | self |  |
 | [getType](#gettype) | Access = private | self, input_file |  |  |
 | [getPaths](#getpaths) | Access = private | self, input_files, output_dir |  |  |
+
+
+</div>
 
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)
@@ -93,4 +108,4 @@ function [] = getPaths(self, input_files, output_dir)
 
 ***
 
-*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 12:30:24 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

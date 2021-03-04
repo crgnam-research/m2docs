@@ -57,8 +57,9 @@ function [sub_function_table] = createSubFunctionTable(names,input_names,output_
     if isempty(names)
         sub_function_table = '*No Sub-Functions*';
     else
-        sub_function_table = ['| Function | Inputs | Outputs | Brief Description |\n',...
-                              '| -------- | ------ | ------- | ----------------- |\n'];
+        sub_function_table = sprintf('%s\n\n%s\n%s\n','<div class="table-wrapper" markdown="block">',...
+                                     '| Function | Inputs | Outputs | Brief Description |',...
+                                     '| -------- | ------ | ------- | ----------------- |');
         for ii = 1:length(names)
             name = sprintf('[%s](#%s)',names{ii},lower(names{ii}));
             inputs = sprintf([repmat('%s, ',1,length(input_names{ii})-1),'%s'],input_names{ii}{:});
@@ -66,6 +67,8 @@ function [sub_function_table] = createSubFunctionTable(names,input_names,output_
             sub_function_table = sprintf([sub_function_table,'| %s | %s | %s | %s |\n'],...
                                       name,inputs,outputs,brief_description{ii});
         end
+        
+        sub_function_table = sprintf('%s\n\n%s\n',sub_function_table,'</div>');
     end
 end
 

@@ -11,8 +11,10 @@
 
 ## Class Attributes
 
-| Attribute         | Status   | 
-| ----------------- | -------- | 
+<div class="table-wrapper" markdown="block">
+
+| Attribute         | Status   |
+| ----------------- | -------- |
 | Abstract | false | 
 | ConstructOnLoad | false | 
 | HandleCompatible | false | 
@@ -20,11 +22,16 @@
 | Sealed | false | 
 
 
+</div>
+
+
 [*Default Class Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/class-attributes.html)
 
  ***
 
 ## Properties
+
+<div class="table-wrapper" markdown="block">
 
 | Property | Attributes  | Type | Default Value | Description |
 | -------- | ----------- | ---- | ------------- | ----------- |
@@ -38,11 +45,16 @@
 | scriptBriefDescription |   | char |  |  |
 | scriptDescription |   | char |  |  |
 
+
+</div>
+
 [*Default Property Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html)
 
  ***
 
 ## Methods
+
+<div class="table-wrapper" markdown="block">
 
 | Method | Attributes | Inputs | Outputs | Brief Description |
 | ------ | ---------- | ------ | ------- | ----------------- |
@@ -51,6 +63,9 @@
 | [getFuncComments](#getfunccomments) | Static = true | fid, tline | brief_description, description, fid, tline |  |
 | [getFuncDeclare](#getfuncdeclare) | Static = true | fid, tline | input_names, output_names, name, fid |  |
 | [parse](#parse) | Static = true | file_name | self |  |
+
+
+</div>
 
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)
@@ -100,4 +115,4 @@ function [self] = parse(file_name)
 
 ***
 
-*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 12:30:25 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

@@ -13,10 +13,15 @@
 
 ## Sub-Functions
 
+<div class="table-wrapper" markdown="block">
+
 | Function | Inputs | Outputs | Brief Description |
 | -------- | ------ | ------- | ----------------- |
 | [createSubFunctionTable](#createsubfunctiontable) | names, input_names, output_names, brief_description | sub_function_table |  |
 | [createSubFunctionDescriptions](#createsubfunctiondescriptions) | name, input_names, output_names, description | sub_function_descr |  |
+
+
+</div>
 
 
  ***
@@ -48,4 +53,4 @@ function [sub_function_descr] = createSubFunctionDescriptions(name, input_names,
 
 ***
 
-*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 12:30:25 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

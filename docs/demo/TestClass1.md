@@ -11,8 +11,10 @@ class brief description
 
 ## Class Attributes
 
-| Attribute         | Status   | 
-| ----------------- | -------- | 
+<div class="table-wrapper" markdown="block">
+
+| Attribute         | Status   |
+| ----------------- | -------- |
 | Abstract | false | 
 | ConstructOnLoad | false | 
 | HandleCompatible | true | 
@@ -20,11 +22,16 @@ class brief description
 | Sealed | true | 
 
 
+</div>
+
+
 [*Default Class Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/class-attributes.html)
 
  ***
 
 ## Properties
+
+<div class="table-wrapper" markdown="block">
 
 | Property | Attributes  | Type | Default Value | Description |
 | -------- | ----------- | ---- | ------------- | ----------- |
@@ -41,11 +48,16 @@ class brief description
 | prop11 | Constant = true, GetAccess = private, NonCopyable = true, SetAccess = none | int32 | 32 | description of prop11 |
 | prop12 | Constant = true, GetAccess = private, NonCopyable = true, SetAccess = none | char | prop11 values | description of prop12 |
 
+
+</div>
+
 [*Default Property Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html)
 
  ***
 
 ## Methods
+
+<div class="table-wrapper" markdown="block">
 
 | Method | Attributes | Inputs | Outputs | Brief Description |
 | ------ | ---------- | ------ | ------- | ----------------- |
@@ -53,6 +65,9 @@ class brief description
 | [method1](#method1) | Access = private | self, inputArg |  |  |
 | [method4](#method4) | Static = true | inputArg, varargin | val | Brief description 4 |
 | [method3](#method3) | Static = true | inputArg | val |  |
+
+
+</div>
 
 
 [*Default Method Attributs*](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)
@@ -169,4 +184,4 @@ end
  
 ***
 
-*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 12:30:25 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
