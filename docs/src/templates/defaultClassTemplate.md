@@ -64,4 +64,4 @@ function [method_descriptions] = createMethodDescriptions(MethodList)
 
 ***
 
-*Generated on 03-Mar-2021 22:07:54 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 03-Mar-2021 23:48:13 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

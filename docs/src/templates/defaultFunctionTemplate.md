@@ -48,4 +48,4 @@ function [sub_function_descr] = createSubFunctionDescriptions(name, input_names,
 
 ***
 
-*Generated on 03-Mar-2021 22:07:54 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 03-Mar-2021 23:48:14 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

@@ -35,6 +35,8 @@
 | Description |   | cell |  |  |
 | Include |   | logical |  |  |
 | code |   | char |  |  |
+| scriptBriefDescription |   | char |  |  |
+| scriptDescription |   | char |  |  |
 
 [*Default Property Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html)
 
@@ -98,4 +100,4 @@ function [self] = parse(file_name)
 
 ***
 
-*Generated on 03-Mar-2021 22:07:54 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 03-Mar-2021 23:48:14 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

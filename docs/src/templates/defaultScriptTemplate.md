@@ -1,11 +1,11 @@
 [Home](../../index.md) > [docs](../../docs_index.md) > [src](../src_index.md) > [templates](templates_index.md)  
 
 
-# function: defaultTemplate
+# function: defaultScriptTemplate
 
 
 
-**Inputs:** m2mdData
+**Inputs:** data, out_abs, out_rel
 
 **Outputs:** 
 
@@ -15,14 +15,8 @@
 
 | Function | Inputs | Outputs | Brief Description |
 | -------- | ------ | ------- | ----------------- |
-| [createCAtable](#createcatable) | CLASS_ATTR | CLASS_ATTR_FORMAT |  |
-| [createPtable](#createptable) | PROPERTIES | PROPERTIES_FORMAT |  |
-| [createCtable](#createctable) | CONSTRUCTOR | CONSTRUCTOR_FORMAT |  |
-| [createMtable](#createmtable) | METHODS | METHODS_FORMAT |  |
-| [createCdescr](#createcdescr) | CONSTRUCTOR | CONSTRUCTOR_DESCR |  |
-| [createMdescr](#createmdescr) | METHODS | METHODS_DESCR |  |
-| [createSFtable](#createsftable) | SUBFUNCTIONS | SUBF_FORMAT |  |
-| [createSFdescr](#createsfdescr) | SUBFUNCTIONS | SUBF_DESCR |  |
+| [createSubFunctionTable](#createsubfunctiontable) | names, input_names, output_names, brief_description | sub_function_table |  |
+| [createSubFunctionDescriptions](#createsubfunctiondescriptions) | name, input_names, output_names, description | sub_function_descr |  |
 
 
  ***
@@ -35,59 +29,17 @@
 
 ## Sub-Function Descriptions
 
- ### createCAtable
+ ### createSubFunctionTable
 
 ```matlab
-function [CLASS_ATTR_FORMAT] = createCAtable(CLASS_ATTR)
+function [sub_function_table] = createSubFunctionTable(names, input_names, output_names, brief_description)
 ```
 
  
- ### createPtable
+ ### createSubFunctionDescriptions
 
 ```matlab
-function [PROPERTIES_FORMAT] = createPtable(PROPERTIES)
-```
-
- 
- ### createCtable
-
-```matlab
-function [CONSTRUCTOR_FORMAT] = createCtable(CONSTRUCTOR)
-```
-
- 
- ### createMtable
-
-```matlab
-function [METHODS_FORMAT] = createMtable(METHODS)
-```
-
- 
- ### createCdescr
-
-```matlab
-function [CONSTRUCTOR_DESCR] = createCdescr(CONSTRUCTOR)
-```
-
- 
- ### createMdescr
-
-```matlab
-function [METHODS_DESCR] = createMdescr(METHODS)
-```
-
- 
- ### createSFtable
-
-```matlab
-function [SUBF_FORMAT] = createSFtable(SUBFUNCTIONS)
-```
-
- 
- ### createSFdescr
-
-```matlab
-function [SUBF_DESCR] = createSFdescr(SUBFUNCTIONS)
+function [sub_function_descr] = createSubFunctionDescriptions(name, input_names, output_names, description)
 ```
 
  
@@ -96,4 +48,4 @@ function [SUBF_DESCR] = createSFdescr(SUBFUNCTIONS)
 
 ***
 
-*Generated on 03-Mar-2021 22:07:54 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 03-Mar-2021 23:48:14 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

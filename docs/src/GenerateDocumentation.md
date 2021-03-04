@@ -32,14 +32,18 @@
 | in_abs |   | cell |  | Nx1 absolute paths to all N input files |
 | out_rel |   | cell |  | Nx1 relative paths to all N output files |
 | out_abs |   | cell |  | Nx1 absolute paths to all N output files |
+| out_dir |   | char |  |  |
 | root |   | char |  | The root directory this was run from |
 | class_template |   | function_handle |  | The template used to format outputs for class files |
 | function_template |   | function_handle |  | The template used to format outputs for function files |
 | script_template |   | function_handle |  | The template used to format outputs for script files |
+| index_template |   | function_handle |  |  |
 | ind |   | double |  | Current itertaion for looping through all files |
 | type |   | cell |  | Nx1 array containing the types for each of the N input files |
 | data |   | cell |  | Nx1 array containing the extracted data from each N input files |
 | code |   | cell |  | Nx1 array containing the source code for each of the N input files |
+| scriptBriefDescription |   | cell |  |  |
+| scriptDescription |   | cell |  |  |
 
 [*Default Property Attributes*](https://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html)
 
@@ -89,4 +93,4 @@ function [] = getPaths(self, input_files, output_dir)
 
 ***
 
-*Generated on 03-Mar-2021 22:07:54 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 03-Mar-2021 23:48:13 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
