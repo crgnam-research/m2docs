@@ -29,14 +29,14 @@
 
 ## Sub-Function Descriptions
 
- ### createSubFunctionTable
+### createSubFunctionTable
 
 ```matlab
 function [sub_function_table] = createSubFunctionTable(names, input_names, output_names, brief_description)
 ```
 
  
- ### createSubFunctionDescriptions
+### createSubFunctionDescriptions
 
 ```matlab
 function [sub_function_descr] = createSubFunctionDescriptions(name, input_names, output_names, description)
@@ -48,4 +48,4 @@ function [sub_function_descr] = createSubFunctionDescriptions(name, input_names,
 
 ***
 
-*Generated on 03-Mar-2021 23:48:14 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

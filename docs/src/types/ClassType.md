@@ -63,19 +63,19 @@
 
 ## Method Descriptions
 
- ### ClassType
+### ClassType
 
 ```matlab
 function [self] = ClassType()
 ```
 
- ### func_declaration_nospace
+### func_declaration_nospace
 
 ```matlab
 function [temp] = func_declaration_nospace(method_list)
 ```
 
- ### parse
+### parse
 
 ```matlab
 function [self] = parse(file_name)
@@ -86,4 +86,4 @@ function [self] = parse(file_name)
 
 ***
 
-*Generated on 03-Mar-2021 23:48:14 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

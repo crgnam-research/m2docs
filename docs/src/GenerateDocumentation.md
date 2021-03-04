@@ -70,19 +70,19 @@
 
 ## Method Descriptions
 
- ### GenerateDocumentation
+### GenerateDocumentation
 
 ```matlab
 function [self] = GenerateDocumentation(input_files, varargin)
 ```
 
- ### getType
+### getType
 
 ```matlab
 function [] = getType(self, input_file)
 ```
 
- ### getPaths
+### getPaths
 
 ```matlab
 function [] = getPaths(self, input_files, output_dir)
@@ -93,4 +93,4 @@ function [] = getPaths(self, input_files, output_dir)
 
 ***
 
-*Generated on 03-Mar-2021 23:48:13 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

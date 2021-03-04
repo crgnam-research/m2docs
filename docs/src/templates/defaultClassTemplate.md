@@ -31,28 +31,28 @@
 
 ## Sub-Function Descriptions
 
- ### createClassAttributeTtable
+### createClassAttributeTtable
 
 ```matlab
 function [class_table] = createClassAttributeTtable(attributes)
 ```
 
  
- ### createPropertyTable
+### createPropertyTable
 
 ```matlab
 function [property_table] = createPropertyTable(PropertyList)
 ```
 
  
- ### createMethodTable
+### createMethodTable
 
 ```matlab
 function [methods_table] = createMethodTable(MethodList)
 ```
 
  
- ### createMethodDescriptions
+### createMethodDescriptions
 
 ```matlab
 function [method_descriptions] = createMethodDescriptions(MethodList)
@@ -64,4 +64,4 @@ function [method_descriptions] = createMethodDescriptions(MethodList)
 
 ***
 
-*Generated on 03-Mar-2021 23:48:13 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*

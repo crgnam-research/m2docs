@@ -65,31 +65,31 @@
 
 ## Method Descriptions
 
- ### FunctionType
+### FunctionType
 
 ```matlab
 function [self] = FunctionType()
 ```
 
- ### inBlockComment
+### inBlockComment
 
 ```matlab
 function [comment, fid] = inBlockComment(fid, tline)
 ```
 
- ### getFuncComments
+### getFuncComments
 
 ```matlab
 function [brief_description, description, fid, tline] = getFuncComments(fid, tline)
 ```
 
- ### getFuncDeclare
+### getFuncDeclare
 
 ```matlab
 function [input_names, output_names, name, fid] = getFuncDeclare(fid, tline)
 ```
 
- ### parse
+### parse
 
 ```matlab
 function [self] = parse(file_name)
@@ -100,4 +100,4 @@ function [self] = parse(file_name)
 
 ***
 
-*Generated on 03-Mar-2021 23:48:14 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
+*Generated on 04-Mar-2021 00:17:21 by [m2docs](https://github.com/crgnam-research/m2docs) © 2021*
