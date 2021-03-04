@@ -1,8 +1,8 @@
-% NAME>{Default Header}
-%
-% BRIEF>{Defines the header text for each markdown file}
 function [header] = defaultHeader(path)
     path = strrep(path,'\','/');
+    if strcmp(path(1),'/')
+        path = path(2:end);
+    end
     path_split = strsplit(path,'/');
     path = '';
     L = length(path_split);
