@@ -98,6 +98,7 @@ classdef ClassType < handle
             if ~isempty(metadata.PropertyList)
                 fn = fieldnames(self.PropertyList.Attributes);
                 for ii = 1:length(metadata.PropertyList)
+                    self.PropertyList(ii).Type = '';
                     self.PropertyList(ii).Name = metadata.PropertyList(ii).Name;
                     if ~isempty(metadata.PropertyList(ii).Validation)
                         if ~isempty(metadata.PropertyList(ii).Validation.Class)

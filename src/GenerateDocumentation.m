@@ -15,10 +15,15 @@ classdef GenerateDocumentation < handle
         type cell % Nx1 array containing the types for each of the N input files
         data cell % Nx1 array containing the extracted data from each N input files
         code cell % Nx1 array containing the source code for each of the N input files
+        
+        scriptBriefDescription cell
+        scriptDescription cell
     end
     
     methods
         function [self] = GenerateDocumentation(input_files,varargin)
+            tic;
+            
             % Process the inputs:
             p = inputParser;
                 validPath = @(x) isa(x,'cell') || isa(x,'char');
@@ -59,7 +64,11 @@ classdef GenerateDocumentation < handle
                     case 'function'
                         self.data{ii} = FunctionType.parse(self.in_abs{ii});
                     case 'script'
-                        self.data{ii} = ScriptType.parse(self.in_abs{ii});
+                        % It is parsed the exact same, just output
+                        % differently:
+                        self.data{ii} = FunctionType.parse(self.in_abs{ii});
+                        self.data{ii}.scriptBriefDescription = self.scriptBriefDescription;
+                        self.data{ii}.scriptDescription = self.scriptDescription;
                 end
             end
             
@@ -79,28 +88,39 @@ classdef GenerateDocumentation < handle
             end
             
             % Create the index files:
+            
+            
+            % Print the details:
+            x = toc;
+            fprintf('%i MATLAB files documented in %f seconds\n',length(self.data),x)
         end
     end
     
     % Utility methods:
     methods (Access = private)
-        function [] = getPaths(self,input_files, output_dir)
+        function [] = getPaths(self,input_files,output_dir)
             N = 1;
             out_path = fullfile(self.root,output_dir);
             for ii = 1:length(input_files)
                 if contains(input_files{ii},'.m')
                     in_file = dir(input_files{ii});
+                    if isempty(in_file)
+                        error('Invalid input of %s.  No such file path exists',input_files{ii})
+                    end
                     self.in_abs{N}  = fullfile(in_file.folder,in_file.name);
                     self.in_rel{N}  = erase(self.in_abs{N},self.root); 
-                    self.out_abs{N} = fullfile(out_path,[self.in_rel{N}(1:end-2)]);
+                    self.out_abs{N} = fullfile(out_path,self.in_rel{N}(1:end-2));
                     self.out_rel{N} = erase(self.out_abs{N},self.root);
                     N = N+1;
                 else
                     in_files = dir(fullfile(input_files{ii},'**/*.m'));
+                    if isempty(in_files)
+                        error('Invalid input of %s.  No such directory path exists',input_files{ii})
+                    end
                     for jj = 1:length(in_files)
                         self.in_abs{N}  = fullfile(in_files(jj).folder,in_files(jj).name);
                         self.in_rel{N}  = erase(self.in_abs{N},self.root); 
-                        self.out_abs{N} = fullfile(out_path,[self.in_rel{N}(1:end-2)]);
+                        self.out_abs{N} = fullfile(out_path,self.in_rel{N}(1:end-2));
                         self.out_rel{N} = erase(self.out_abs{N},self.root);
                         N = N+1;
                     end
@@ -113,20 +133,32 @@ classdef GenerateDocumentation < handle
             fid = fopen(input_file);
             tline = fgetl(fid);
             in_block_comment = false;
+            leading_comments = '';
             while ischar(tline)
                 tline = strtrim(tline);
                 % Check current line for comments:
                 if in_block_comment
-                    if strcmp(tline(1:2),'%}')
-                        in_block_comment = false;
-                    end
+                    if length(tline) >= 2
+                        if strcmp(tline(1:2),'%}')
+                            in_block_comment = false;
+                        end
+                    end 
                 else
-                    if strcmp(tline(1:2),'%{')
-                        in_block_comment = true;
+                    if length(tline) >= 2
+                        if strcmp(tline(1:2),'%{')
+                            in_block_comment = true;
+                        end
                     end
-                end              
+                end
+                in_comment = false;
+                if ~in_block_comment && length(tline)>=1
+                    if strcmp(tline(1),'%')
+                        in_comment = true;
+                    end
+                end
                 
-                if ~in_block_comment
+                % Check if something has been defined then:
+                if ~in_block_comment && ~in_comment
                     if length(tline) >= 8
                         if contains(tline(1:8),'classdef')
                             self.type{self.ind} = 'class';
@@ -134,12 +166,17 @@ classdef GenerateDocumentation < handle
                         elseif contains(tline(1:8),'function')
                             self.type{self.ind} = 'function';
                             break
-                        else
-                            self.type{self.ind} = 'script';
-                            break
                         end
                     end
+                    if ~isempty(tline)
+                        self.scriptBriefDescription = extractBetween(leading_comments,'@brief{','}');
+                        self.scriptDescription = extractBetween(leading_comments,'@description{','}');
+                        self.type{self.ind} = 'script';
+                        break
+                    end
                 end
+                tline = strtrim(erase(tline,{'%','%{'}));
+                leading_comments = sprintf('%s\n%s',leading_comments,tline);
                 tline = fgetl(fid);
             end
             fclose(fid);
